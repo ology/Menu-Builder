@@ -1,7 +1,7 @@
 use inc::Module::Install;
 
-name        'menu-builder';
-all_from    'menu-builder';
+name        'menu-builder.pl';
+all_from    'menu-builder.pl';
 license     'perl';
 
 requires    'Mojolicious';
