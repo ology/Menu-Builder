@@ -1,4 +1,5 @@
-%= tag h1 => 'Authorized'
+%= tag h1 => 'Settings'
 %= include '_flash'
-%= tag 'p'
+%= link_to 'My Menus' => 'menus'
+|
 %= link_to Logout => 'logout'
