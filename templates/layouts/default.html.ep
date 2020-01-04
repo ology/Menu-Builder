@@ -2,11 +2,12 @@
 <html lang="en">
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="public/style.css">
-    <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="<%= url_for 'style.css' %>">
+    <script src="<%= url_for 'jquery-3.4.1.min.js' %>"></script>
   </head>
   <body>
     <%= content %>
+    <p>
     <div id="footer">
       <b>Built by <a href="http://gene.ology.net/">Gene Boggs</a></b>
     </div>
