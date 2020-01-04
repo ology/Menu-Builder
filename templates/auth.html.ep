@@ -24,18 +24,36 @@
 % }
 % while ( my $m = $meals->next ) {
 <div class="cellblue">
-%= $m->name
+    <button id="meal_<%= $m->id %>"><%= $m->name %></button>
+    <div id="meal_items" style="display: none">
+    % for my $i ( keys %$meal_items ) {
+        %= $i
+    % }
+    </div>
 </div>
+%= tag 'p'
 % }
 
 <script>
 $(document).ready(
     function() {
-        $('#add').click(
-            function() {
-                $('#meal_item').append('<input type="text" name="item" size="30" placeholder="Item"><br>');
-            }
-        );
+        add_click();
+        meal_click();
     }
 );
+
+function add_click() {
+    $('#add').click(
+        function() {
+            $('#meal_item').append('<input type="text" name="item" size="30" placeholder="Item"><br>');
+        }
+    );
+}
+
+function meal_click() {
+    $("[id^=meal_]").click(function () {
+        var num = this.id.slice(5);
+        var elem = $('#meal_' + num);
+    });
+}
 </script>

@@ -101,7 +101,23 @@ get '/auth' => sub {
         }
     );
 
-    $self->stash( account_id => $account_id, meals => $meals );
+    my $meal_items = {};
+    for my $meal ( $meals->all ) {
+        my $items = $self->schema->resultset('MealItem')->search(
+            {
+                meal_id => $meal->id,
+            },
+            {
+                order_by => { -asc => 'name' },
+            }
+        );
+
+        for my $item ( $items->all ) {
+            push @{ $meal_items->{ $meal->id } }, $item->name;
+        }
+    }
+
+    $self->stash( account_id => $account_id, meals => $meals, meal_items => $meal_items );
 } => 'auth';
 
 =head2 POST /new_meal
@@ -127,7 +143,7 @@ post '/new_meal' => sub {
     for my $item ( @$items ) {
         $self->schema->resultset('MealItem')->create(
             {
-                name    => $name,
+                name    => $item,
                 meal_id => $meal->id,
             },
         );
