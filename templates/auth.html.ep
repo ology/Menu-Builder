@@ -3,3 +3,5 @@
 %= link_to 'My Menus' => 'menus'
 |
 %= link_to Logout => 'logout'
+%= tag 'p'
+%= tag b => 'Meals'
