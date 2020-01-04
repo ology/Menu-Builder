@@ -1,8 +1,6 @@
 % layout 'default';
 %= include '_flash'
 %= link_to 'My Menus' => 'menus'
-|
-%= link_to Logout => 'logout'
 %= tag 'p'
 %= tag h2 => 'Meal Type:'
 <div class="tablewrapper">
@@ -11,6 +9,7 @@
             <div class="cellblue">
                 <button id="add">+</button>
                 <form action="/new_meal" method="post" title="Create a new meal">
+                    <input type="hidden" name="account_id" value="<%= $account_id %>">
                     <input type="text" name="name" id="name" size="30" placeholder="Name">
                     <div id="meal_item"></div>
                     <input type="submit" name="submit" id="new" value="New">
@@ -19,6 +18,15 @@
         </div>
     </div>
 </div>
+
+% if ( $meals ) {
+%= tag 'p'
+% }
+% while ( my $m = $meals->next ) {
+<div class="cellblue">
+%= $m->name
+</div>
+% }
 
 <script>
 $(document).ready(

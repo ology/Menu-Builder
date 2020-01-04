@@ -44,9 +44,9 @@ Set session C<auth> if valid.
 post '/login' => sub {
     my ($self) = @_;
 
-    if ( $self->auth( $self->param('username'), $self->param('password') ) ) {
+    if ( my $id = $self->auth( $self->param('username'), $self->param('password') ) ) {
         $self->session( auth => 1 );
-        return $self->redirect_to('auth');
+        return $self->redirect_to( '/auth?account_id=' . $id );
     }
 
     $self->flash( error => 'Invalid login' );
@@ -83,13 +83,58 @@ under sub {
 
 =head2 GET /auth
 
-Authorized page
+Settings page
 
 =cut
 
 get '/auth' => sub {
     my ($self) = @_;
+
+    my $account_id = $self->param('account_id');
+
+    my $meals = $self->schema->resultset('Meal')->search(
+        {
+            account_id => $account_id,
+        },
+        {
+            order_by => { -asc => 'name' },
+        }
+    );
+
+    $self->stash( account_id => $account_id, meals => $meals );
 } => 'auth';
+
+=head2 POST /new_meal
+
+Create a new menu type.
+
+=cut
+
+post '/new_meal' => sub {
+    my ($self) = @_;
+
+    my $account_id = $self->param('account_id');
+    my $name       = $self->param('name');
+    my $items      = $self->every_param('item');
+
+    my $meal = $self->schema->resultset('Meal')->create(
+        {
+            name       => $name,
+            account_id => $account_id,
+        },
+    );
+
+    for my $item ( @$items ) {
+        $self->schema->resultset('MealItem')->create(
+            {
+                name    => $name,
+                meal_id => $meal->id,
+            },
+        );
+    }
+
+    $self->redirect_to( '/auth?account_id=' . $account_id );
+};
 
 =head2 GET /menus
 

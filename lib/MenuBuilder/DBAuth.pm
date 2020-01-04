@@ -18,7 +18,7 @@ sub register {
 
         my $result = $c->schema->resultset('Account')->search_by_name($user);
 
-        return 1
+        return $result->id
             if $result && $c->bcrypt_validate( $pass, $result->password );
     } );
 

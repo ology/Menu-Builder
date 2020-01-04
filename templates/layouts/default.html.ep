@@ -8,6 +8,10 @@
   <body>
     <%= content %>
     <div id="footer">
+      <b>
+      %= link_to Logout => 'logout'
+      </b>
+      |
       <b>Built by <a href="http://gene.ology.net/">Gene Boggs</a></b>
     </div>
   </body>
