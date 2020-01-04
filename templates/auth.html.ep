@@ -16,8 +16,6 @@
                     <input type="submit" name="submit" id="new" value="New">
                 </form>
             </div>
-            <div>
-            </div>
         </div>
     </div>
 </div>
