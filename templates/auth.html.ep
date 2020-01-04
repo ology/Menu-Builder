@@ -1,21 +1,18 @@
 % layout 'default';
-%= tag h1 => 'Settings'
 %= include '_flash'
 %= link_to 'My Menus' => 'menus'
 |
 %= link_to Logout => 'logout'
 %= tag 'p'
-%= tag h2 => 'Meals'
-<button id="toggle">+</button>
-%= tag 'p'
+%= tag h2 => 'Meal Type:'
 <div class="tablewrapper">
     <div class="table">
-        <div id="new_meal" class="row" style="display: none">
-            <div>
-            </div>
+        <div class="row">
             <div class="cellblue">
+                <button id="add">+</button>
                 <form action="/new_meal" method="post" title="Create a new meal">
-                    <input type="text" name="name" id="name" size="60" placeholder="Name">
+                    <input type="text" name="name" id="name" size="30" placeholder="Name">
+                    <div id="meal_item"></div>
                     <input type="submit" name="submit" id="new" value="New">
                 </form>
             </div>
@@ -28,16 +25,9 @@
 <script>
 $(document).ready(
     function() {
-        $('#toggle').click(
+        $('#add').click(
             function() {
-                $('#new_meal').toggle();
-                if ( $("#toggle").html() == '+' ) {
-                    $("#toggle").html('-');
-                    $("#name").focus();
-                }
-                else {
-                    $("#toggle").html('+');
-                }
+                $('#meal_item').append('<input type="text" name="item" size="30" placeholder="Item"><br>');
             }
         );
     }
