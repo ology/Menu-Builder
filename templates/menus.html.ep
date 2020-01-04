@@ -1,4 +1,5 @@
 %= tag h1 => 'My Menus'
+%= include '_flash'
 %= link_to Settings => 'auth'
 |
 %= link_to Logout => 'logout'
