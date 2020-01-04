@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <title><%= title %></title>
-    <link rel="stylesheet" href="<%= url_for 'style.css' %>">
-    <script src="<%= url_for 'jquery-3.4.1.min.js' %>"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.4.1.min.js"></script>
   </head>
   <body>
     <%= content %>
