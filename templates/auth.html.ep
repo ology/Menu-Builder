@@ -14,7 +14,7 @@
             <div>
             </div>
             <div class="cellblue">
-                <form action="/new" method="post" title="Create a new meal">
+                <form action="/new_meal" method="post" title="Create a new meal">
                     <input type="text" name="name" id="name" size="60" placeholder="Name">
                     <input type="submit" name="submit" id="new" value="New">
                 </form>
