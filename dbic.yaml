@@ -1,0 +1,5 @@
+menu-builder.db:
+    dsn: 'dbi:SQLite:dbname=menu-builder.db'
+    user: ''
+    password: ''
+    #TraceLevel: 1
