@@ -22,28 +22,6 @@ sub register {
             if $result && $c->bcrypt_validate( $pass, $result->password );
     } );
 
-    $app->helper( add => sub {
-        my ( $c, $user, $pass ) = @_;
-
-        return 0
-            unless $user && $pass;
-
-        my $result = $c->schema->resultset('Account')->create_new(
-            $user,
-            $c->bcrypt($pass),
-        );
-
-        return $result;
-    } );
-
-    $app->helper( accounts => sub {
-        my ($c) = @_;
-
-        my $result = $c->schema->resultset('Account');
-
-        return $result;
-    } );
-
 }
 
 1;
