@@ -6,7 +6,7 @@ menu-builder.pl
 
 =head1 DESCRIPTION
 
-TODO
+Menu builder web app.
 
 =cut
 
