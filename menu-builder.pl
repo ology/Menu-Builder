@@ -91,6 +91,16 @@ get '/auth' => sub {
     my ($self) = @_;
 } => 'auth';
 
+=head2 GET /menus
+
+Menus list
+
+=cut
+
+get '/menus' => sub {
+    my ($self) = @_;
+} => 'menus';
+
 app->start;
 
 =head1 AUTHOR
