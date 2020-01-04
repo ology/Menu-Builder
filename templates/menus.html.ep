@@ -1,4 +1,4 @@
 %= tag h1 => 'My Menus'
-%= link_to 'index'
+%= link_to Settings => 'index'
 |
-%= link_to 'logout'
+%= link_to Logout => 'logout'
