@@ -10,7 +10,7 @@ sub register {
     $app->helper( schema => sub {
         my ($c) = @_;
 
-        return state $schema = AuthHelper::Schema->connect( $c->config('database') );
+        return state $schema = MenuBuilder::Schema->connect( $c->config('database') );
     } );
 
     $app->helper( auth => sub {
