@@ -27,7 +27,7 @@
     <button id="meal_<%= $m->id %>"><%= $m->name %></button>
     <div id="meal_items" style="display: none">
     % for my $i ( keys %$meal_items ) {
-        %= $i
+        %= $meal_items->{$i}
     % }
     </div>
 </div>
