@@ -7,7 +7,6 @@
   </head>
   <body>
     <%= content %>
-    <p>
     <div id="footer">
       <b>Built by <a href="http://gene.ology.net/">Gene Boggs</a></b>
     </div>
