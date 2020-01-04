@@ -83,7 +83,7 @@ under sub {
 
 =head2 GET /auth
 
-Show all accounts and new user form.
+Authorized page
 
 =cut
 
