@@ -1,0 +1,4 @@
+%= tag h1 => 'My Menus'
+%= link_to 'index'
+|
+%= link_to 'logout'
