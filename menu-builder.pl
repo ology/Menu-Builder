@@ -2,13 +2,11 @@
 
 =head1 NAME
 
-auth-helper
+menu-builder.pl
 
 =head1 DESCRIPTION
 
-This is a L<Mojolicious::Lite> app that enables login/out and new
-account creation with L<Mojolicious::Plugin::Bcrypt> through
-L<DBIx::Class>.
+TODO
 
 =cut
 
@@ -25,7 +23,7 @@ plugin 'Config';
 app->secrets( app->config->{secrets} );
 
 plugin 'bcrypt';
-plugin 'AuthHelper::DBAuth';
+plugin 'MenuBuilder::DBAuth';
 
 =head1 PUBLIC ROUTES
 
@@ -91,32 +89,7 @@ Show all accounts and new user form.
 
 get '/auth' => sub {
     my ($self) = @_;
-
-    my $accounts = $self->accounts;
-
-    $self->render( accounts => $accounts );
 } => 'auth';
-
-=head2 POST /add
-
-Add new user.
-
-=cut
-
-post '/add' => sub {
-    my ($self) = @_;
-
-    my $result = $self->add( $self->param('username'), $self->param('password') );
-
-    if ( $result ) {
-        $self->flash( message => 'User added' );
-    }
-    else {
-        $self->flash( error => 'Cannot add user!' );
-    }
-
-    $self->redirect_to('auth');
-};
 
 app->start;
 
@@ -132,44 +105,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
-__DATA__
-
-@@_credentials.html.ep
-    %= label_for username => 'Username:'
-    %= text_field 'username'
-    %= label_for password => 'Password:'
-    %= password_field 'password'
-
-@@_flash.html.ep
-% if ( flash('error') ) {
-    %= tag h2 => (style => 'color:red') => flash('error')
-% }
-% if ( flash('message') ) {
-    %= tag h2 => (style => 'color:green') => flash('message')
-% }
-
-@@index.html.ep
-%= tag h1 => 'Login'
-%= include '_flash'
-%= form_for login => (method => 'post') => begin
-    %= include '_credentials'
-    %= submit_button 'Login'
-%= end
-
-@@auth.html.ep
-%= tag h1 => 'Authorized'
-%= include '_flash'
-New user:
-%= form_for add => (method => 'post') => begin
-    %= include '_credentials'
-    %= submit_button 'Add'
-%= end
-% if ( $accounts ) {
-    % while ( my $account = $accounts->next ) {
-    <%= $account->id %>: <%= $account->name %> - <%= $account->created %>
-    %= tag 'br'
-    % }
-% }
-%= tag 'p'
-%= link_to Logout => 'logout'
