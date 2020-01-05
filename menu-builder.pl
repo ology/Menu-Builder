@@ -247,7 +247,7 @@ any '/menus' => sub {
         meal_name  => $name,
         items      => $items,
         menus      => $menus,
-        menu_items => $menu_items
+        menu_items => $menu_items,
     );
 } => 'menus';
 
