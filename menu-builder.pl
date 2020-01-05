@@ -203,6 +203,7 @@ any '/menus' => sub {
 
     my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
     my $name = $meal ? $meal->name : '';
+    my $id   = $meal ? $meal->id : '';
 
     my $items = $self->schema->resultset('MealItem')->search(
         {
@@ -213,8 +214,37 @@ any '/menus' => sub {
         }
     );
 
-    $self->stash( account_id => $account_id, meals => $meals, meal_name => $name, items => $items );
+    $self->stash( account_id => $account_id, meals => $meals, meal_id => $id, meal_name => $name, items => $items );
 } => 'menus';
+
+post '/add_menu' => sub {
+    my ($self) = @_;
+
+    my $account_id = $self->param('account_id');
+    my $meal_id    = $self->param('meal_id');
+    my $name       = $self->param('menu_name');
+    my $ids        = $self->every_param('meal_item_id');
+    my $values     = $self->every_param('item_value');
+
+    my $menu = $self->schema->resultset('Menu')->create(
+        {
+            name    => $name,
+            meal_id => $meal_id,
+        },
+    );
+
+    for my $n ( 0 .. @$values - 1 ) {
+        $self->schema->resultset('MenuItem')->create(
+            {
+                meal_item_id => $ids->[$n],
+                value        => $values->[$n],
+                menu_id      => $menu->id,
+            },
+        );
+    }
+
+    $self->redirect_to( '/menus?account_id=' . $account_id );
+};
 
 app->start;
 
