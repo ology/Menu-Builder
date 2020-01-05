@@ -58,8 +58,6 @@ a.button {
     appearance: button;
     text-decoration: none;
     color: initial;
-    display: block;
-    margin: 0 auto;
 };
 
 .tablewrapper {
