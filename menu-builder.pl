@@ -151,6 +151,18 @@ post '/new_meal' => sub {
     $self->redirect_to('/auth');
 };
 
+=head2 POST /update_meal
+
+Update a meal.
+
+=cut
+
+post '/update_meal' => sub {
+    my ($self) = @_;
+
+    $self->redirect_to('/auth');
+};
+
 =head2 POST /delete_meal
 
 Delete a meal.
@@ -275,6 +287,18 @@ post '/add_menu' => sub {
             },
         );
     }
+
+    $self->redirect_to('/menus');
+};
+
+=head2 POST /update_menu
+
+Update a menu.
+
+=cut
+
+post '/update_menu' => sub {
+    my ($self) = @_;
 
     $self->redirect_to('/menus');
 };
