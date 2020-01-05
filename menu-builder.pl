@@ -230,6 +230,10 @@ any '/menus' => sub {
             {
                 menu_id => $menu->id,
             },
+            {
+                join     => 'meal_item',
+                prefetch => 'meal_item',
+            }
         );
 
         for my $m_item ( $m_items->all ) {
