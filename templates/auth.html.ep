@@ -52,7 +52,7 @@ $(document).ready(
 function add_click() {
     $('#add').click(
         function() {
-            $('#meal_item').append('<input type="text" name="item" size="30" placeholder="Item"><br>');
+            $('#meal_item').append('<input type="text" name="item" size="30" placeholder="Category"><br>');
         }
     );
 }
