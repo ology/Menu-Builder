@@ -144,6 +144,9 @@ post '/new_meal' => sub {
             );
         }
     }
+    else {
+        $self->flash( error => 'No meal name given!' );
+    }
 
     $self->redirect_to('/auth');
 };
