@@ -20,7 +20,7 @@
 
 % if ( $items->count ) {
 %= tag 'p'
-%= tag h3 => $meal_name
+%= tag h3 => "New $meal_name menu:"
 %= tag 'p'
 <div class="cellblue">
 <form action="/add_menu" method="post">
@@ -39,8 +39,12 @@
 % }
 
 % if ( $menus->count ) {
+% my %seen;
 %= tag 'p'
-    % while ( my $m = $menus->next ) {
+    % for my $m ( sort { $a->meal->name cmp $b->meal->name } $menus->all ) {
+        % unless ( $seen{ $m->meal->name }++ ) {
+<b><%= $m->meal->name %>:</b>
+        % }
 <div class="cellblue">
     <button id="menu_<%= $m->id %>"><%= $m->name %></button>
     <div id="menu_items_<%= $m->id %>" style="display: none">
@@ -57,7 +61,6 @@
         </form>
     </div>
 </div>
-%= tag 'br'
     % }
 % }
 
