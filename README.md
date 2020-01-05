@@ -7,8 +7,6 @@ Perl5 Mojolicious::Lite web app to build meal menus
 
 > make installdeps
 
-> sqlite3 menu-builder.db  # Then ^D
-
 > sqlite3 menu-builder.db < menu-builder.sql
 
 > perl add-user.pl foo abc123
