@@ -29,7 +29,14 @@
     %= tag 'p'
 % while ( my $i = $items->next ) {
         <input type="hidden" name="meal_item_id" value="<%= $i->id %>">
-        <input type="text" name="item_value" size="60" placeholder="<%= $i->name %>">
+        <input type="text" name="item_value" size="60" placeholder="<%= $i->name %>" list="menu_item_list">
+        <datalist id="menu_item_list">
+    % for my $m_id ( keys %$menu_items ) {
+        % for my $item ( @{ $menu_items->{$m_id} } ) {
+            <option><%= $item->value %></option>
+        % }
+    % }
+        </datalist>
     %= tag 'br'
 % }
     %= tag 'br'
