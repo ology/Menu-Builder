@@ -1,6 +1,17 @@
 % layout 'default';
-%= tag h1 => 'My Menus'
 %= include '_flash'
-%= link_to Settings => 'auth'
-|
-%= link_to Logout => 'logout'
+%= link_to Settings => 'auth', class => 'button'
+%= tag h2 => 'Menus:'
+<div class="tablewrapper">
+    <div class="table">
+        <div class="row">
+            <div class="cellblue">
+                <form action="/new_menu" method="post" title="Create a new menu">
+                    <input type="text" name="name" id="name" size="30" placeholder="Name">
+                    <div id="menu_item"></div>
+                    <input type="submit" name="submit" value="New">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
