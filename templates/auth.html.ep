@@ -1,6 +1,6 @@
 % layout 'default';
 %= include '_flash'
-%= link_to 'My Menus' => '/menus?account_id=' . $account_id, class => 'button'
+%= link_to 'My Menus' => '/menus', class => 'button'
 %= tag h2 => 'Meal Type:'
 <div class="tablewrapper">
     <div class="table">
@@ -8,7 +8,6 @@
             <div class="cellblue">
                 <button id="add">+</button>
                 <form action="/new_meal" method="post" title="Create a new meal">
-                    <input type="hidden" name="account_id" value="<%= $account_id %>">
                     <input type="text" name="name" id="name" size="30" placeholder="Name">
                     <div id="meal_item"></div>
                     <input type="submit" name="submit" value="New">
@@ -32,7 +31,6 @@
     % }
     %= tag 'p'
     <form action="/delete_meal" method="post" title="Delete meal">
-        <input type="hidden" name="account_id" value="<%= $account_id %>">
         <input type="hidden" name="meal_id" value="<%= $m->id %>">
         <input type="submit" name="submit" value="Delete">
     </form>

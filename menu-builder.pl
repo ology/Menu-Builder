@@ -45,8 +45,8 @@ post '/login' => sub {
     my ($self) = @_;
 
     if ( my $id = $self->auth( $self->param('username'), $self->param('password') ) ) {
-        $self->session( auth => 1 );
-        return $self->redirect_to( '/auth?account_id=' . $id );
+        $self->session( auth => $id );
+        return $self->redirect_to('/auth');
     }
 
     $self->flash( error => 'Invalid login' );
@@ -73,7 +73,7 @@ under sub {
     my $session = $self->session('auth') // '';
 
     return 1
-        if $session eq '1';
+        if $session;
 
     $self->render( text => 'Denied!' );
     return 0;
@@ -90,7 +90,7 @@ Settings page
 get '/auth' => sub {
     my ($self) = @_;
 
-    my $account_id = $self->param('account_id');
+    my $account_id = $self->session('auth');
 
     my $meals = $self->schema->resultset('Meal')->search(
         {
@@ -117,7 +117,7 @@ get '/auth' => sub {
         }
     }
 
-    $self->stash( account_id => $account_id, meals => $meals, meal_items => $meal_items );
+    $self->stash( meals => $meals, meal_items => $meal_items );
 } => 'auth';
 
 =head2 POST /new_meal
@@ -129,7 +129,7 @@ Create a new meal type.
 post '/new_meal' => sub {
     my ($self) = @_;
 
-    my $account_id = $self->param('account_id');
+    my $account_id = $self->session('auth');
     my $name       = $self->param('name');
     my $items      = $self->every_param('item');
 
@@ -149,7 +149,7 @@ post '/new_meal' => sub {
         );
     }
 
-    $self->redirect_to( '/auth?account_id=' . $account_id );
+    $self->redirect_to('/auth');
 };
 
 =head2 POST /delete_meal
@@ -161,7 +161,7 @@ Delete a meal.
 post '/delete_meal' => sub {
     my ($self) = @_;
 
-    my $account_id = $self->param('account_id');
+    my $account_id = $self->session('auth');
     my $meal_id    = $self->param('meal_id');
 
     my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
@@ -177,7 +177,7 @@ post '/delete_meal' => sub {
         $item->delete;
     }
 
-    $self->redirect_to( '/auth?account_id=' . $account_id );
+    $self->redirect_to('/auth');
 };
 
 =head2 GET /menus
@@ -189,7 +189,7 @@ Menus list
 any '/menus' => sub {
     my ($self) = @_;
 
-    my $account_id = $self->param('account_id');
+    my $account_id = $self->session('auth');
     my $meal_id    = $self->param('meal_id');
 
     my $meals = $self->schema->resultset('Meal')->search(
@@ -242,13 +242,13 @@ any '/menus' => sub {
     }
 
 
-    $self->stash( account_id => $account_id, meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus, menu_items => $menu_items );
+    $self->stash( meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus, menu_items => $menu_items );
 } => 'menus';
 
 post '/add_menu' => sub {
     my ($self) = @_;
 
-    my $account_id = $self->param('account_id');
+    my $account_id = $self->session('auth');
     my $meal_id    = $self->param('meal_id');
     my $name       = $self->param('menu_name');
     my $ids        = $self->every_param('meal_item_id');
@@ -271,13 +271,13 @@ post '/add_menu' => sub {
         );
     }
 
-    $self->redirect_to( '/menus?account_id=' . $account_id );
+    $self->redirect_to('/menus');
 };
 
 post '/delete_menu' => sub {
     my ($self) = @_;
 
-    my $account_id = $self->param('account_id');
+    my $account_id = $self->session('auth');
     my $menu_id    = $self->param('menu_id');
 
     my $menu = $self->schema->resultset('Menu')->find({ id => $menu_id });
@@ -293,7 +293,7 @@ post '/delete_menu' => sub {
         $item->delete;
     }
 
-    $self->redirect_to( '/menus?account_id=' . $account_id );
+    $self->redirect_to('/menus');
 };
 
 app->start;
