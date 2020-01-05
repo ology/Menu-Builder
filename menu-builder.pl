@@ -241,8 +241,14 @@ any '/menus' => sub {
         }
     }
 
-
-    $self->stash( meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus, menu_items => $menu_items );
+    $self->stash(
+        meals      => $meals,
+        meal_id    => $id,
+        meal_name  => $name,
+        items      => $items,
+        menus      => $menus,
+        menu_items => $menu_items
+    );
 } => 'menus';
 
 =head2 POST /add_menu
