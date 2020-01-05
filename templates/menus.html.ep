@@ -5,7 +5,6 @@
 <div class="tablewrapper">
     <div class="table">
         <div class="row">
-            <div class="cellblue">
                 <form action="/menus" method="post">
                     <input type="hidden" name="account_id" value="<%= $account_id %>">
                     <select name="meal_id">
@@ -16,7 +15,6 @@
                     </select>
                     <input type="submit" name="submit" value="New">
                 </form>
-            </div>
         </div>
     </div>
 </div>
@@ -27,9 +25,12 @@
 %= tag 'p'
 <div class="cellblue">
 <form action="/add_menu" method="post">
+    <input type="hidden" name="account_id" value="<%= $account_id %>">
+    <input type="hidden" name="meal_id" value="<%= $meal_id %>">
     <input type="text" name="menu_name" size="30" placeholder="Menu name">
     %= tag 'p'
 % while ( my $i = $items->next ) {
+        <input type="hidden" name="meal_item_id" value="<%= $i->id %>">
         <input type="text" name="item_value" size="60" placeholder="<%= $i->name %>">
     %= tag 'br'
 % }
