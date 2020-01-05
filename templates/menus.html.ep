@@ -1,14 +1,18 @@
 % layout 'default';
 %= include '_flash'
-%= link_to Settings => 'auth', class => 'button'
+%= link_to Settings => '/auth?account_id=' . $account_id, class => 'button'
 %= tag h2 => 'Menus:'
 <div class="tablewrapper">
     <div class="table">
         <div class="row">
             <div class="cellblue">
                 <form action="/new_menu" method="post" title="Create a new menu">
-                    <input type="text" name="name" id="name" size="30" placeholder="Name">
-                    <div id="menu_item"></div>
+                    <select name="name">
+                        <option value="">Select...</option>
+% while ( my $m = $meals->next ) {
+                        <option value="<%= $m->id %>"><%= $m->name %></option>
+% }
+                    </select>
                     <input type="submit" name="submit" value="New">
                 </form>
             </div>
