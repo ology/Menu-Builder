@@ -6,11 +6,11 @@
     <div class="table">
         <div class="row">
             <div class="cellblue">
-                <button id="add">+</button>
+                <button id="add">Add Category</button>
                 <form action="/new_meal" method="post" title="Create a new meal">
                     <input type="text" name="name" id="name" size="30" placeholder="Name">
                     <div id="meal_item"></div>
-                    <input type="submit" name="submit" value="New">
+                    <input type="submit" name="submit" value="Submit New Meal">
                 </form>
             </div>
         </div>
