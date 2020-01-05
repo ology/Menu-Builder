@@ -186,8 +186,34 @@ Menus list
 
 =cut
 
-get '/menus' => sub {
+any '/menus' => sub {
     my ($self) = @_;
+
+    my $account_id = $self->param('account_id');
+    my $meal_id    = $self->param('meal_id');
+
+    my $meals = $self->schema->resultset('Meal')->search(
+        {
+            account_id => $account_id,
+        },
+        {
+            order_by => { -asc => 'name' },
+        }
+    );
+
+    my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
+    my $name = $meal ? $meal->name : '';
+
+    my $items = $self->schema->resultset('MealItem')->search(
+        {
+            meal_id => $meal_id,
+        },
+        {
+            order_by => { -asc => 'name' },
+        }
+    );
+
+    $self->stash( account_id => $account_id, meals => $meals, meal_name => $name, items => $items );
 } => 'menus';
 
 app->start;
