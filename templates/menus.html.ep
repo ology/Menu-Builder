@@ -6,9 +6,9 @@
     <div class="table">
         <div class="row">
             <div class="cellblue">
-                <form action="/new_menu" method="post" title="Create a new menu">
+                <form action="/menus" method="post">
                     <input type="hidden" name="account_id" value="<%= $account_id %>">
-                    <select name="name">
+                    <select name="meal_id">
                         <option value="">Select...</option>
 % while ( my $m = $meals->next ) {
                         <option value="<%= $m->id %>"><%= $m->name %></option>
@@ -20,3 +20,21 @@
         </div>
     </div>
 </div>
+
+% if ( $items->count ) {
+%= tag 'p'
+%= tag h3 => $meal_name
+%= tag 'p'
+<div class="cellblue">
+<form action="/add_menu" method="post">
+    <input type="text" name="menu_name" size="30" placeholder="Menu name">
+    %= tag 'p'
+% while ( my $i = $items->next ) {
+        <input type="text" name="item_value" size="60" placeholder="<%= $i->name %>">
+    %= tag 'br'
+% }
+    %= tag 'br'
+    <input type="submit" name="submit" value="Add">
+</form>
+</div>
+% }
