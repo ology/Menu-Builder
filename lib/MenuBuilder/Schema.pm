@@ -7,13 +7,15 @@ package MenuBuilder::Schema;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Schema::Config';
+use base 'DBIx::Class::Schema';
+
+__PACKAGE__->load_components("Schema::Config");
 
 __PACKAGE__->load_namespaces;
 
 
-# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-01-03 20:56:07
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:oN/786UD2A2KcxdWtZ2Nlw
+# Created by DBIx::Class::Schema::Loader v0.07049 @ 2020-01-04 20:36:01
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:8WHgoLWKBTSgKC+t19hAfg
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
