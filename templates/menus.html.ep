@@ -42,9 +42,38 @@
 
 % if ( $menus->count ) {
 %= tag 'p'
+    % while ( my $m = $menus->next ) {
 <div class="cellblue">
-% while ( my $m = $menus->next ) {
-    %= $m->name
-% }
+    <button id="menu_<%= $m->id %>"><%= $m->name %></button>
+    <div id="menu_items_<%= $m->id %>" style="display: none">
+        %= tag 'p'
+    % for my $i ( @{ $menu_items->{ $m->id } } ) {
+        %= $i->value
+        %= tag 'br'
+    % }
+    %= tag 'p'
+        <form action="/delete_menu" method="post" title="Delete menu">
+            <input type="hidden" name="account_id" value="<%= $account_id %>">
+            <input type="hidden" name="menu_id" value="<%= $m->id %>">
+            <input type="submit" name="submit" value="Delete">
+        </form>
+    </div>
 </div>
+%= tag 'br'
+    % }
 % }
+
+<script>
+$(document).ready(
+    function() {
+        menu_click();
+    }
+);
+
+function menu_click() {
+    $('[id^=menu_]').click(function () {
+        var num = this.id.slice(5);
+        $('#menu_items_' + num).toggle();
+    });
+}
+</script>
