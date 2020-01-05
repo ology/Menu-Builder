@@ -58,6 +58,7 @@
         %= tag 'p'
         % for my $i ( @{ $menu_items->{ $m->id } } ) {
         <%= $i->meal_item->name %>:
+        %= tag 'br'
         <input type="text" name="item_value" size="20" placeholder="Item value" value="<%= $i->value %>">
         %= tag 'br'
         % }
