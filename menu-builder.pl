@@ -135,13 +135,18 @@ post '/new_meal' => sub {
             },
         );
 
-        for my $item ( @$items ) {
-            $self->schema->resultset('MealItem')->create(
-                {
-                    name    => $item,
-                    meal_id => $meal->id,
-                },
-            );
+        if ( grep { !$_ } @$items ) {
+            for my $item ( @$items ) {
+                $self->schema->resultset('MealItem')->create(
+                    {
+                        name    => $item,
+                        meal_id => $meal->id,
+                    },
+                );
+            }
+        }
+        else {
+            $self->flash( error => 'Blank meal categories not allowed!' );
         }
     }
     else {
@@ -271,8 +276,9 @@ post '/add_menu' => sub {
     my $ids        = $self->every_param('meal_item_id');
     my $values     = $self->every_param('item_value');
 
+    my $menu;
     if ( $name ) {
-        my $menu = $self->schema->resultset('Menu')->create(
+        $menu = $self->schema->resultset('Menu')->create(
             {
                 name    => $name,
                 meal_id => $meal_id,
