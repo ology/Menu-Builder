@@ -271,12 +271,17 @@ post '/add_menu' => sub {
     my $ids        = $self->every_param('meal_item_id');
     my $values     = $self->every_param('item_value');
 
-    my $menu = $self->schema->resultset('Menu')->create(
-        {
-            name    => $name,
-            meal_id => $meal_id,
-        },
-    );
+    if ( $name ) {
+        my $menu = $self->schema->resultset('Menu')->create(
+            {
+                name    => $name,
+                meal_id => $meal_id,
+            },
+        );
+    }
+    else {
+        $self->flash( error => 'No menu name given!' );
+    }
 
     for my $n ( 0 .. @$values - 1 ) {
         $self->schema->resultset('MenuItem')->create(
