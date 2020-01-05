@@ -18,7 +18,7 @@
     </div>
 </div>
 
-% if ( $meals ) {
+% if ( $meals->count ) {
 %= tag 'p'
 % }
 % while ( my $m = $meals->next ) {
@@ -38,7 +38,7 @@
     </form>
     </div>
 </div>
-%= tag 'p'
+%= tag 'br'
 % }
 
 <script>
