@@ -122,7 +122,7 @@ get '/auth' => sub {
 
 =head2 POST /new_meal
 
-Create a new menu type.
+Create a new meal type.
 
 =cut
 
