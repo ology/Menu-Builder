@@ -96,9 +96,6 @@ get '/auth' => sub {
         {
             account_id => $account_id,
         },
-        {
-            order_by => { -asc => 'name' },
-        }
     );
 
     my $meal_items = {};
@@ -107,9 +104,6 @@ get '/auth' => sub {
             {
                 meal_id => $meal->id,
             },
-            {
-                order_by => { -asc => 'name' },
-            }
         );
 
         for my $item ( $items->all ) {
@@ -196,9 +190,6 @@ any '/menus' => sub {
         {
             account_id => $account_id,
         },
-        {
-            order_by => { -asc => 'name' },
-        }
     );
 
     my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
@@ -209,9 +200,6 @@ any '/menus' => sub {
         {
             meal_id => $meal_id,
         },
-        {
-            order_by => { -asc => 'name' },
-        }
     );
 
     my $menus = $self->schema->resultset('Menu')->search(
