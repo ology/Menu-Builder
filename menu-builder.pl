@@ -135,7 +135,7 @@ post '/new_meal' => sub {
             },
         );
 
-        if ( grep { !$_ } @$items ) {
+#        if ( grep { !$_ } @$items ) {
             for my $item ( @$items ) {
                 $self->schema->resultset('MealItem')->create(
                     {
@@ -144,10 +144,10 @@ post '/new_meal' => sub {
                     },
                 );
             }
-        }
-        else {
-            $self->flash( error => 'Blank meal categories not allowed!' );
-        }
+#        }
+#        else {
+#            $self->flash( error => 'Blank meal categories not allowed!' );
+#        }
     }
     else {
         $self->flash( error => 'No meal name given!' );
