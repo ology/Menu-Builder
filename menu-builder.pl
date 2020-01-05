@@ -180,7 +180,7 @@ post '/delete_meal' => sub {
     $self->redirect_to('/auth');
 };
 
-=head2 GET /menus
+=head2 GET/POST /menus
 
 Menus list
 
@@ -245,6 +245,12 @@ any '/menus' => sub {
     $self->stash( meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus, menu_items => $menu_items );
 } => 'menus';
 
+=head2 POST /add_menu
+
+Add a new menu.
+
+=cut
+
 post '/add_menu' => sub {
     my ($self) = @_;
 
@@ -273,6 +279,12 @@ post '/add_menu' => sub {
 
     $self->redirect_to('/menus');
 };
+
+=head2 POST /delete_menu
+
+Delete a menu.
+
+=cut
 
 post '/delete_menu' => sub {
     my ($self) = @_;
