@@ -224,7 +224,21 @@ any '/menus' => sub {
         }
     );
 
-    $self->stash( account_id => $account_id, meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus );
+    my $menu_items = {};
+    for my $menu ( $menus->all ) {
+        my $m_items = $self->schema->resultset('MenuItem')->search(
+            {
+                menu_id => $menu->id,
+            },
+        );
+
+        for my $m_item ( $m_items->all ) {
+            push @{ $menu_items->{ $menu->id } }, $m_item;
+        }
+    }
+
+
+    $self->stash( account_id => $account_id, meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus, menu_items => $menu_items );
 } => 'menus';
 
 post '/add_menu' => sub {
