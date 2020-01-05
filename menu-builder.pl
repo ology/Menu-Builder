@@ -127,20 +127,22 @@ post '/new_meal' => sub {
     my $name       = $self->param('name');
     my $items      = $self->every_param('item');
 
-    my $meal = $self->schema->resultset('Meal')->create(
-        {
-            name       => $name,
-            account_id => $account_id,
-        },
-    );
-
-    for my $item ( @$items ) {
-        $self->schema->resultset('MealItem')->create(
+    if ( $name ) {
+        my $meal = $self->schema->resultset('Meal')->create(
             {
-                name    => $item,
-                meal_id => $meal->id,
+                name       => $name,
+                account_id => $account_id,
             },
         );
+
+        for my $item ( @$items ) {
+            $self->schema->resultset('MealItem')->create(
+                {
+                    name    => $item,
+                    meal_id => $meal->id,
+                },
+            );
+        }
     }
 
     $self->redirect_to('/auth');
