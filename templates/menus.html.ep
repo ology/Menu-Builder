@@ -5,15 +5,15 @@
 <div class="tablewrapper">
     <div class="table">
         <div class="row">
-                <form action="/menus" method="post">
-                    <select name="meal_id">
-                        <option value="">Select...</option>
+            <form action="/menus" method="post">
+                <select name="meal_id">
+                    <option value="">Select...</option>
 % while ( my $m = $meals->next ) {
-                        <option value="<%= $m->id %>"><%= $m->name %></option>
+                    <option value="<%= $m->id %>"><%= $m->name %></option>
 % }
-                    </select>
-                    <input type="submit" name="submit" value="New">
-                </form>
+                </select>
+                <input type="submit" name="submit" value="New">
+            </form>
         </div>
     </div>
 </div>
