@@ -25,7 +25,7 @@ CREATE TABLE menu (
 
 CREATE TABLE menu_item (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+    meal_item_id INTEGER NOT NULL,
     value TEXT NOT NULL,
     menu_id INTEGER NOT NULL
 );
