@@ -152,6 +152,34 @@ post '/new_meal' => sub {
     $self->redirect_to( '/auth?account_id=' . $account_id );
 };
 
+=head2 POST /delete_meal
+
+Delete a meal.
+
+=cut
+
+post '/delete_meal' => sub {
+    my ($self) = @_;
+
+    my $account_id = $self->param('account_id');
+    my $meal_id    = $self->param('meal_id');
+
+    my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
+    $meal->delete;
+
+    my $items = $self->schema->resultset('MealItem')->search(
+        {
+            meal_id => $meal->id,
+        },
+    );
+
+    while ( my $item = $items->next ) {
+        $item->delete;
+    }
+
+    $self->redirect_to( '/auth?account_id=' . $account_id );
+};
+
 =head2 GET /menus
 
 Menus list
