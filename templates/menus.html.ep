@@ -39,3 +39,12 @@
 </form>
 </div>
 % }
+
+% if ( $menus->count ) {
+%= tag 'p'
+<div class="cellblue">
+% while ( my $m = $menus->next ) {
+    %= $m->name
+% }
+</div>
+% }

@@ -214,7 +214,17 @@ any '/menus' => sub {
         }
     );
 
-    $self->stash( account_id => $account_id, meals => $meals, meal_id => $id, meal_name => $name, items => $items );
+    my $menus = $self->schema->resultset('Menu')->search(
+        {
+            'meal.account_id' => $account_id,
+        },
+        {
+            join     => 'meal',
+            prefetch => 'meal',
+        }
+    );
+
+    $self->stash( account_id => $account_id, meals => $meals, meal_id => $id, meal_name => $name, items => $items, menus => $menus );
 } => 'menus';
 
 post '/add_menu' => sub {
