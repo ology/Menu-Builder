@@ -54,6 +54,7 @@
         % }
         %= tag 'p'
         <form action="/delete_menu" method="post" title="Delete menu">
+            <input type="hidden" name="account_id" value="<%= $account_id %>">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
             <input type="submit" name="submit" value="Delete">
         </form>

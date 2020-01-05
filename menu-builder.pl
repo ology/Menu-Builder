@@ -274,6 +274,28 @@ post '/add_menu' => sub {
     $self->redirect_to( '/menus?account_id=' . $account_id );
 };
 
+post '/delete_menu' => sub {
+    my ($self) = @_;
+
+    my $account_id = $self->param('account_id');
+    my $menu_id    = $self->param('menu_id');
+
+    my $menu = $self->schema->resultset('Menu')->find({ id => $menu_id });
+    $menu->delete;
+
+    my $items = $self->schema->resultset('MenuItem')->search(
+        {
+            menu_id => $menu->id,
+        },
+    );
+
+    while ( my $item = $items->next ) {
+        $item->delete;
+    }
+
+    $self->redirect_to( '/menus?account_id=' . $account_id );
+};
+
 app->start;
 
 =head1 AUTHOR
