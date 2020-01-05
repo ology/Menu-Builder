@@ -1,5 +1,5 @@
 # Menu-Builder
-Perl5 web app to build meal menus
+Perl5 Mojolicious::Lite web app to build meal menus
 
 > git clone https://github.com/ology/Menu-Builder.git
 
