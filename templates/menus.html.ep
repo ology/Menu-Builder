@@ -58,10 +58,14 @@
         %= tag 'p'
         % for my $i ( @{ $menu_items->{ $m->id } } ) {
         <%= $i->meal_item->name %>:
-        %= $i->value
+        <input type="text" name="item_value" size="20" placeholder="Item value" value="<%= $i->value %>">
         %= tag 'br'
         % }
         %= tag 'p'
+        <form action="/update_menu" method="post" title="Update menu">
+            <input type="hidden" name="menu_id" value="<%= $m->id %>">
+            <input type="submit" name="submit" value="Update">
+        </form>
         <form action="/delete_menu" method="post" title="Delete menu">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
             <input type="submit" name="submit" value="Delete">
