@@ -33,6 +33,7 @@
     % }
     %= tag 'p'
     <form action="/delete_meal" method="post" title="Delete meal">
+        <input type="hidden" name="account_id" value="<%= $account_id %>">
         <input type="hidden" name="meal_id" value="<%= $m->id %>">
         <input type="submit" name="submit" value="Delete">
     </form>
