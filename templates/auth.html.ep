@@ -26,10 +26,14 @@
     <div id="meal_items_<%= $m->id %>" style="display: none">
     %= tag 'p'
     % for my $i ( @{ $meal_items->{ $m->id } } ) {
-        %= $i
+        <input type="text" name="meal_item" size="20" placeholder="Name" value="<%= $i %>">
         %= tag 'br'
     % }
     %= tag 'p'
+    <form action="/update_meal" method="post" title="Update meal">
+        <input type="hidden" name="meal_id" value="<%= $m->id %>">
+        <input type="submit" name="submit" value="Update">
+    </form>
     <form action="/delete_meal" method="post" title="Delete meal">
         <input type="hidden" name="meal_id" value="<%= $m->id %>">
         <input type="submit" name="submit" value="Delete">
