@@ -27,8 +27,11 @@
         %= tag 'p'
         <form action="/update_meal" method="post" title="Update meal">
             <input type="hidden" name="meal_id" value="<%= $m->id %>">
+            <input type="text" name="meal_name" size="20" placeholder="Name" value="<%= $m->name %>">
+            %= tag 'br'
     % for my $i ( @{ $meal_items->{ $m->id } } ) {
-            <input type="text" name="meal_item_<%= $i->{id} %>" size="20" placeholder="Name" value="<%= $i->{name} %>">
+            <input type="hidden" name="meal_item_id" value="<%= $i->{id} %>">
+            <input type="text" name="meal_item" size="20" placeholder="Category" value="<%= $i->{name} %>">
             %= tag 'br'
     % }
             %= tag 'p'

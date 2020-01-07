@@ -163,6 +163,20 @@ Update a meal.
 post '/update_meal' => sub {
     my ($self) = @_;
 
+    my $account_id    = $self->session('auth');
+    my $meal_id       = $self->param('meal_id');
+    my $meal_name     = $self->param('meal_name');
+    my $meal_item_ids = $self->every_param('meal_item_id');
+    my $meal_items    = $self->every_param('meal_item');
+
+    my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
+    $meal->update({ name => $meal_name });
+
+    for my $n ( 0 .. @$meal_items - 1 ) {
+        my $item = $self->schema->resultset('MealItem')->find({ id => $meal_item_ids->[$n] });
+        $item->update({ name => $meal_items->[$n] });
+    }
+
     $self->redirect_to('/auth');
 };
 
