@@ -138,19 +138,14 @@ post '/new_meal' => sub {
             },
         );
 
-#        if ( grep { !$_ } @$items ) {
-            for my $item ( @$items ) {
-                $self->schema->resultset('MealItem')->create(
-                    {
-                        name    => $item,
-                        meal_id => $meal->id,
-                    },
-                );
-            }
-#        }
-#        else {
-#            $self->flash( error => 'Blank meal categories not allowed!' );
-#        }
+        for my $item ( @$items ) {
+            $self->schema->resultset('MealItem')->create(
+                {
+                    name    => $item,
+                    meal_id => $meal->id,
+                },
+            );
+        }
     }
     else {
         $self->flash( error => 'No meal name given!' );
