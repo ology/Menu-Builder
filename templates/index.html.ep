@@ -1,6 +1,12 @@
+% layout 'default';
 %= tag h1 => 'Login'
 %= include '_flash'
+
+<div class="cellblue">
+
 %= form_for login => (method => 'post') => begin
     %= include '_credentials'
     %= submit_button 'Login'
 %= end
+
+</div>
