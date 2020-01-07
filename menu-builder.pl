@@ -107,7 +107,10 @@ get '/auth' => sub {
         );
 
         for my $item ( $items->all ) {
-            push @{ $meal_items->{ $meal->id } }, $item->name;
+            push @{ $meal_items->{ $meal->id } }, {
+                id   => $item->id,
+                name => $item->name,
+            };
         }
     }
 
