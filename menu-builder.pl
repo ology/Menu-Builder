@@ -204,6 +204,26 @@ post '/delete_meal' => sub {
         $item->delete;
     }
 
+    my $menus = $self->schema->resultset('Menu')->search(
+        {
+            meal_id => $meal->id,
+        },
+    );
+
+    while ( my $menu = $menus->next ) {
+        $menu->delete;
+
+        $items = $self->schema->resultset('MenuItem')->search(
+            {
+                menu_id => $menu->id,
+            },
+        );
+
+        while ( my $item = $items->next ) {
+            $item->delete;
+        }
+    }
+
     $self->redirect_to('/auth');
 };
 
