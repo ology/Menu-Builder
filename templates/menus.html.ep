@@ -1,6 +1,6 @@
 % layout 'default';
 %= include '_flash'
-%= link_to Meals => '/auth', class => 'button'
+%= link_to 'My Meals' => '/auth', class => 'button'
 %= tag h2 => 'Menus:'
 <div class="tablewrapper">
     <div class="table">
@@ -61,15 +61,18 @@
     <button id="menu_<%= $m->id %>"><%= $m->name %></button>
     <div id="menu_items_<%= $m->id %>" style="display: none">
         %= tag 'p'
-        % for my $i ( @{ $menu_items->{ $m->id } } ) {
-        <%= $i->meal_item->name %>:
-        %= tag 'br'
-        <input type="text" name="item_value" size="30" placeholder="Item value" value="<%= $i->value %>">
-        %= tag 'br'
-        % }
-        %= tag 'p'
         <form action="/update_menu" method="post" title="Update menu">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
+            <input type="text" name="menu_name" size="20" placeholder="Name" value="<%= $m->name %>">
+            %= tag 'br'
+        % for my $i ( @{ $menu_items->{ $m->id } } ) {
+            <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
+            <%= $i->meal_item->name %>:
+            %= tag 'br'
+            <input type="text" name="menu_item" size="30" placeholder="Item value" value="<%= $i->value %>">
+            %= tag 'br'
+        % }
+            %= tag 'p'
             <input type="submit" name="submit" value="Update">
         </form>
         <form action="/delete_menu" method="post" title="Delete menu">
