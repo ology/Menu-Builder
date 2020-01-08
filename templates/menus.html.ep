@@ -5,7 +5,7 @@
 <div class="tablewrapper">
     <div class="table">
         <div class="row">
-            <form action="/menus" method="post">
+            <form action="/menus" method="post" style="display: inline-block;">
                 <select name="meal_id">
                     <option value="">Select...</option>
 % while ( my $m = $meals->next ) {
@@ -14,7 +14,7 @@
                 </select>
                 <input type="submit" name="submit" value="New">
             </form>
-            %= tag 'p'
+            |
             <button id="toggle_menu_schedule">Toggle Schedule</botton>
         </div>
     </div>
