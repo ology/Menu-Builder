@@ -46,10 +46,21 @@
 % }
 
 % if ( $menus->count ) {
-% my %seen;
+    % my %seen;
+    % for my $m ( sort { $a->meal->name cmp $b->meal->name } $menus->all ) {
+        % next unless $m->meal->name =~ /daily|weekly|monthly|yearly|schedule/i;
+        % unless ( $seen{ $m->meal->name }++ ) {
+%= tag 'p'
+<b><%= $m->meal->name %>:</b>
+        % }
+%= include '_menu_block', m => $m, menu_items => $menu_items
+    % }
+
+% %seen = ();
 % my $counter;
 %= tag 'p'
     % for my $m ( sort { $a->meal->name cmp $b->meal->name } $menus->all ) {
+        % next if $m->meal->name =~ /daily|weekly|monthly|yearly|schedule/i;
         % unless ( $seen{ $m->meal->name }++ ) {
 %= tag 'p'
 <b><%= $m->meal->name %>:</b>
@@ -57,30 +68,7 @@
         % unless ( $counter % 7 ) {
 %= tag 'br'
         % }
-<div class="cellblue">
-    <button id="menu_<%= $m->id %>"><%= $m->name %></button>
-    <div id="menu_items_<%= $m->id %>" style="display: none">
-        %= tag 'p'
-        <form action="/update_menu" method="post" title="Update menu">
-            <input type="hidden" name="menu_id" value="<%= $m->id %>">
-            <input type="text" name="menu_name" size="20" placeholder="Menu name" value="<%= $m->name %>">
-            %= tag 'p'
-        % for my $i ( @{ $menu_items->{ $m->id } } ) {
-            <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
-            <%= $i->meal_item->name %>:
-            %= tag 'br'
-            <input type="text" name="menu_item" size="30" placeholder="Item value" value="<%= $i->value %>">
-            %= tag 'br'
-        % }
-            %= tag 'p'
-            <input type="submit" name="submit" value="Update">
-        </form>
-        <form action="/delete_menu" method="post" title="Delete menu" onclick="return confirm('Delete this menu?')">
-            <input type="hidden" name="menu_id" value="<%= $m->id %>">
-            <input type="submit" name="submit" value="Delete">
-        </form>
-    </div>
-</div>
+%= include '_menu_block', m => $m, menu_items => $menu_items
         % $counter++;
     % }
 % }
