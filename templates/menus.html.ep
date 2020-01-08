@@ -66,18 +66,32 @@
 % %seen = ();
 % my $counter;
 %= tag 'p'
+<div class="tablewrapper">
+    <div class="table">
+
     % for my $m ( sort { $a->meal->name cmp $b->meal->name } $menus->all ) {
         % next if $m->meal->name =~ /daily|weekly|monthly|yearly|schedule/i;
+        % $counter++;
         % unless ( $seen{ $m->meal->name }++ ) {
-%= tag 'p'
+            % if ( $counter > 1 ) {
+        </div>
+            % }
+        <div class="row">
 <b><%= $m->meal->name %>:</b>
+        </div>
+        <div class="row">
         % }
         % unless ( $counter % 7 ) {
-%= tag 'br'
+        </div>
+        <div class="row">
         % }
 %= include '_menu_block', m => $m, menu_items => $menu_items
-        % $counter++;
+
     % }
+
+    </div>
+</div>
+
 % }
 
 <script>
