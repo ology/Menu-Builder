@@ -67,7 +67,7 @@
     <div class="table">
 
     % %seen = ();
-    % my $counter;
+    % my $counter = 0;
     % for my $m ( sort { $a->meal->name cmp $b->meal->name } $menus->all ) {
         % next if $m->meal->name =~ /daily|weekly|monthly|yearly|schedule/i;
         % $counter++;
