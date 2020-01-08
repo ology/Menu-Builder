@@ -14,6 +14,8 @@
                 </select>
                 <input type="submit" name="submit" value="New">
             </form>
+            %= tag 'p'
+            <button id="toggle_menu_schedule">Toggle Schedule</botton>
         </div>
     </div>
 </div>
@@ -46,6 +48,9 @@
 % }
 
 % if ( $menus->count ) {
+
+<div id="menu_schedule" style="display: none">
+
     % my %seen;
     % for my $m ( sort { $a->meal->name cmp $b->meal->name } $menus->all ) {
         % next unless $m->meal->name =~ /daily|weekly|monthly|yearly|schedule/i;
@@ -55,6 +60,8 @@
         % }
 %= include '_menu_block', m => $m, menu_items => $menu_items
     % }
+
+</div>
 
 % %seen = ();
 % my $counter;
@@ -76,9 +83,16 @@
 <script>
 $(document).ready(
     function() {
+        toggle_schedules();
         menu_click();
     }
 );
+
+function toggle_schedules() {
+    $('#toggle_menu_schedule').click(function () {
+        $('#menu_schedule').toggle();
+    });
+}
 
 function menu_click() {
     $('[id^=menu_]').click(function () {
