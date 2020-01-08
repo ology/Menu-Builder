@@ -63,8 +63,8 @@
         %= tag 'p'
         <form action="/update_menu" method="post" title="Update menu">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
-            <input type="text" name="menu_name" size="20" placeholder="Name" value="<%= $m->name %>">
-            %= tag 'br'
+            <input type="text" name="menu_name" size="20" placeholder="Menu name" value="<%= $m->name %>">
+            %= tag 'p'
         % for my $i ( @{ $menu_items->{ $m->id } } ) {
             <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
             <%= $i->meal_item->name %>:
