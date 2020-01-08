@@ -77,7 +77,8 @@
         </div>
             % }
         <div class="row">
-<b><%= $m->meal->name %>:</b>
+            %= tag 'p'
+            <b><%= $m->meal->name %>:</b>
         </div>
         <div class="row">
         % }
