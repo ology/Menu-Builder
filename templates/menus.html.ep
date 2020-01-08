@@ -65,7 +65,7 @@
 
 % %seen = ();
 % my $counter;
-%= tag 'p'
+
 <div class="tablewrapper">
     <div class="table">
 
