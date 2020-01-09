@@ -29,3 +29,10 @@ CREATE TABLE menu_item (
     value TEXT NOT NULL,
     menu_id INTEGER NOT NULL
 );
+
+CREATE TABLE item_detail (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_id INTEGER NOT NULL,
+    ingredients TEXT NOT NULL,
+    instructions TEXT
+);
