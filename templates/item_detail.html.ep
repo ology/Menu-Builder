@@ -5,7 +5,7 @@
 
 %= form_for item_detail => (method => 'post') => begin
     %= input_tag acct => $account_id, type => 'hidden'
-    %= input_tag item_id => ($item ? $item->id : 0), type => 'hidden'
+    %= input_tag item => ($item ? $item->id : 0), type => 'hidden'
     %= label_for ingredients => 'Ingredients:'
     %= tag 'br'
     %= text_area ingredients => ($detail ? $detail->ingredients : ''), cols => 60, rows => 10
