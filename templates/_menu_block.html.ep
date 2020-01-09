@@ -2,7 +2,7 @@
     <button id="menu_<%= $m->id %>"><%= $m->name %></button>
     <div id="menu_items_<%= $m->id %>" style="display: none">
         %= tag 'p'
-        <form action="/update_menu" method="post" title="Update menu">
+        <form action="/update_menu" method="post">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
             <input type="text" name="menu_name" size="30" placeholder="Menu name" value="<%= $m->name %>">
             %= tag 'p'
@@ -14,7 +14,7 @@
             %= tag 'br'
         % }
             %= tag 'p'
-            <input type="submit" name="submit" value="Update">
+            <input type="submit" name="submit" value="Update" title="Update menu">
         </form>
         <form action="/delete_menu" method="post" title="Delete menu" onclick="return confirm('Delete this menu?')">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
