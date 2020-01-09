@@ -1,0 +1,20 @@
+% layout 'default';
+%= include '_flash'
+% my $item_name = $item ? $item->value : 'Item';
+%= tag h1 => $item_name . ' Detail'
+
+%= form_for item_detail => (method => 'post') => begin
+    %= input_tag acct => $account_id, type => 'hidden'
+    %= input_tag item_id => ($item ? $item->id : 0), type => 'hidden'
+    %= label_for ingredients => 'Ingredients:'
+    %= tag 'br'
+    %= text_area ingredients => ($detail ? $detail->ingredients : ''), cols => 60, rows => 10
+    %= tag 'p'
+    %= label_for instructions => 'Instructions:'
+    %= tag 'br'
+    %= text_area instructions => ($detail ? $detail->instructions : ''), cols => 60, rows => 10
+    %= tag 'br'
+    %= submit_button 'Submit'
+%= end
+
+%= tag 'p'
