@@ -9,6 +9,9 @@
         % for my $i ( @{ $menu_items->{ $m->id } } ) {
             <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
             <%= $i->meal_item->name %>:
+            % if ( $i->value ) {
+            <a href="/menu_item/<%= $account_id %>/<%= $i->id %>" class="button">></a>
+            % }
             %= tag 'br'
             <input type="text" name="menu_item" size="30" placeholder="Item value" value="<%= $i->value %>">
             %= tag 'br'
