@@ -289,6 +289,7 @@ any '/menus' => sub {
         items      => $items,
         menus      => $menus,
         menu_items => $menu_items,
+        account_id => $account_id,
     );
 } => 'menus';
 
@@ -383,6 +384,65 @@ post '/delete_menu' => sub {
     }
 
     $self->redirect_to('/menus');
+};
+
+=head2 GET /menu_item/:menu/:item
+
+Show a menu item detail.
+
+=cut
+
+get '/menu_item/:acct/:item' => sub {
+    my ($self) = @_;
+
+    my $account_id = $self->session('auth');
+    my $acct_id    = $self->param('acct');
+    my $item_id    = $self->param('item');
+
+    my $item;
+    my $detail;
+
+    if ( $account_id ne $acct_id ) {
+        $self->flash( error => 'Invalid item!' );
+    }
+    else {
+        $item = $self->schema->resultset('MenuItem')->find({ id => $item_id });
+
+        $detail = $self->schema->resultset('ItemDetail')->find({ item_id => $item_id });
+    }
+
+    $self->render(
+        template => 'item_detail',
+        item       => $item,
+        detail     => $detail,
+        account_id => $account_id,
+    );
+};
+
+post '/item_detail' => sub {
+    my ($self) = @_;
+
+    my $account_id   = $self->session('auth');
+    my $acct_id      = $self->param('acct');
+    my $item_id      = $self->param('item');
+    my $ingredients  = $self->param('ingredients');
+    my $instructions = $self->param('instructions');
+
+    if ( $account_id ne $acct_id ) {
+        $self->flash( error => 'Invalid item!' );
+    }
+    else {
+        my $detail = $self->schema->resultset('ItemDetail')->find({ item_id => $item_id });
+        my $query = { item_id => $item_id, ingredients => $ingredients, instructions => $instructions };
+        if ( $detail ) {
+            $detail->update($query);
+        }
+        else {
+            $self->schema->resultset('ItemDetail')->create($query);
+        }
+    }
+
+    $self->redirect_to('/menu_item/' . $account_id .'/' . $item_id);
 };
 
 app->start;
