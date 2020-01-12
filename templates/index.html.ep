@@ -1,3 +1,4 @@
+% stash('template', __FILE__);
 % layout 'default';
 %= tag h1 => 'Login'
 %= include '_flash'
