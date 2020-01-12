@@ -1,3 +1,4 @@
+% stash('template', __FILE__);
 % layout 'default';
 %= include '_flash'
 % my $item_name = $item ? $item->value : 'Item';

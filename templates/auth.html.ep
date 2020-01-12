@@ -1,3 +1,4 @@
+% stash('template', __FILE__);
 % layout 'default';
 %= include '_flash'
 %= link_to 'My Menus' => '/menus', class => 'button'
