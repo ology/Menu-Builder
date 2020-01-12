@@ -8,7 +8,7 @@
   <body>
     <%= content %>
     <div id="footer">
-% if ( !$template || $template !~ /index/) {
+% if ( $template !~ /index/) {
       <b>
       %= link_to Logout => 'logout'
       </b>
