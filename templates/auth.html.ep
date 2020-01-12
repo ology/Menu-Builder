@@ -21,7 +21,12 @@
 % if ( $meals->count ) {
 %= tag 'p'
 % }
+% my $counter = 0;
 % while ( my $m = $meals->next ) {
+    % $counter++;
+    % if ( $counter % 8 == 0 ) {
+%= tag 'br'
+    % }
 <div class="cellblue">
     <button id="meal_<%= $m->id %>"><%= $m->name %></button>
     <div id="meal_items_<%= $m->id %>" style="display: none">
