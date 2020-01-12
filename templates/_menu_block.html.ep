@@ -5,6 +5,7 @@
         <form action="/update_menu" method="post">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
             <input type="text" name="menu_name" size="30" placeholder="Menu name" value="<%= $m->name %>">
+            <a href="http://dev.ology.net:8060/?title=<%= $m->name %>" class="button" target="_blank">></a>
             %= tag 'p'
         % for my $i ( @{ $menu_items->{ $m->id } } ) {
             <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
