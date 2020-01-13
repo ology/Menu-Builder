@@ -2,7 +2,8 @@
 % layout 'default';
 %= include '_flash'
 %= link_to 'My Menus' => '/menus', class => 'button'
-%= tag h2 => 'Meal Type:'
+%= tag 'p'
+%= tag b => 'Meal Type:'
 <div class="tablewrapper">
     <div class="table">
         <div class="row">
