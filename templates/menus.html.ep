@@ -78,10 +78,8 @@
         </div>
             % }
         <div class="row">
-            <div class="cellclear">
-                %= tag 'p'
-                <b><%= $m->meal->name %>:</b>
-            </div>
+            %= tag 'p'
+            <b><%= $m->meal->name %>:</b>
         </div>
         <div class="row">
         % }
