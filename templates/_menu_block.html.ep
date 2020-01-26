@@ -1,4 +1,4 @@
-<div class="cellblue">
+<div class="cellblue" style="display: inline-block; vertical-align: top;">
     <button id="menu_<%= $m->id %>"><%= $m->name %></button>
     <div id="menu_items_<%= $m->id %>" style="display: none">
         %= tag 'p'
