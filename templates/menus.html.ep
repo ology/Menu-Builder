@@ -15,7 +15,7 @@
 % }
                 </select>
             </form>
-            <button id="toggle_menu_schedule">Toggle Schedule</botton>
+            <button id="toggle_menu_schedule" style="border: 1px solid #bbb;"">Toggle Schedule</button>
         </div>
     </div>
 </div>
