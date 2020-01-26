@@ -4,21 +4,15 @@
 %= link_to 'Go to My Meals' => '/auth', class => 'button', style => "border: 1px solid #bbb;"
 %= tag 'p'
 %= tag b => 'Menus:'
-<div class="tablewrapper">
-    <div class="table">
-        <div class="row">
-            <form action="/menus" method="post" style="display: inline-block;">
-                <select name="meal_id" onchange="this.form.submit();">
-                    <option value="">Select...</option>
+<form action="/menus" method="post" style="display: inline-block;">
+    <select name="meal_id" onchange="this.form.submit();">
+        <option value="">Select...</option>
 % while ( my $m = $meals->next ) {
-                    <option value="<%= $m->id %>"><%= $m->name %></option>
+        <option value="<%= $m->id %>"><%= $m->name %></option>
 % }
-                </select>
-            </form>
-            <button id="toggle_menu_schedule" style="border: 1px solid #bbb;"">Toggle Schedule</button>
-        </div>
-    </div>
-</div>
+    </select>
+</form>
+<button id="toggle_menu_schedule" style="border: 1px solid #bbb;"">Toggle Schedule</button>
 
 % if ( $items->count ) {
 %= tag 'p'
