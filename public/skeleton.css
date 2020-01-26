@@ -172,6 +172,7 @@ input[type="reset"],
 input[type="button"] {
   display: inline-block;
   height: 38px;
+  min-width: 35px;
   padding: 0 5px;
   color: #555;
   text-align: center;
