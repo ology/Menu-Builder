@@ -59,6 +59,7 @@
         % unless ( $seen{ $m->meal->name }++ ) {
 %= tag 'p'
 <b><%= $m->meal->name %>:</b>
+%= tag 'br'
         % }
 %= include '_menu_block', m => $m, menu_items => $menu_items
     % }
