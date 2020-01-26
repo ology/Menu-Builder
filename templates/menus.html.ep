@@ -8,15 +8,13 @@
     <div class="table">
         <div class="row">
             <form action="/menus" method="post" style="display: inline-block;">
-                <select name="meal_id">
+                <select name="meal_id" onchange="this.form.submit();">
                     <option value="">Select...</option>
 % while ( my $m = $meals->next ) {
                     <option value="<%= $m->id %>"><%= $m->name %></option>
 % }
                 </select>
-                <input type="submit" name="submit" value="New">
             </form>
-            |
             <button id="toggle_menu_schedule">Toggle Schedule</botton>
         </div>
     </div>
