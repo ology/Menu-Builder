@@ -6,7 +6,7 @@
 %= tag b => 'Menus:'
 <form action="/menus" method="post" style="display: inline-block;">
     <select name="meal_id" onchange="this.form.submit();">
-        <option value="">Select...</option>
+        <option value="">New...</option>
 % while ( my $m = $meals->next ) {
         <option value="<%= $m->id %>"><%= $m->name %></option>
 % }
