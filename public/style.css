@@ -1,73 +1,60 @@
 body {
-margin: 10px;
-margin-bottom: 25px;
-padding: 0;
-background-color: #EBF4FA;
-font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-font-size: 13px;
-color: #333;
+    margin : 0.5em;
+    background-color: #EBF4FA;
+}
+
+ul {
+    list-style : none;
+    padding-left : 0;
+}
+
+li {
+    list-style-type : none;
 }
 
 form {
-//  display: inline;
-//  margin: 0;
+    display : inline;
 }
 
-h1 {
-font-size: 28px;
-color: #000;
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform : scale(2); /* IE */
+  -moz-transform : scale(2); /* FF */
+  -webkit-transform : scale(2); /* Safari and Chrome */
+  -o-transform : scale(2); /* Opera */
+  transform : scale(2);
+  padding : 10px;
+  margin : 10px;
 }
 
-a  {
-//color: #03c
-}
-a:hover {
-//background-color: #03c;
-//color: white;
-//text-decoration: none;
+select {
+    height : 35px;
 }
 
-#content {
-background-color: white;
-border: 3px solid #aaa;
-border-top: none;
-padding: 25px;
-width: 500px;
-}
-
-h1, h2, h3, h4, h5 {
-font-family: sans-serif;
-margin: 1.2em 0 0.6em 0;
-}
-
-code, .filepath, .app-info {
-    font-family: 'Andale Mono', Monaco, 'Liberation Mono', 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', monospace;
+.button-light {
+    background-color : #d2f0f9;
 }
 
 #footer {
-clear: both;
-padding-top: 2em;
-padding-right: 160px;
-font-family: sans-serif;
-font-size: 10px;
+    clear : both;
+    padding-top : 2em;
+    padding-right : 160px;
+    font-family : sans-serif;
+//    font-size : 10px;
 }
-
-a.button {
-    -webkit-appearance: button;
-    -moz-appearance: button;
-    appearance: button;
-    text-decoration: none;
-    color: initial;
-};
 
 .tablewrapper {
-  position: relative;
+  position : relative;
 }
 .table {
-  display: table;
+  display : table;
 }
 .row {
-  display: table-row;
+  display : table-row;
+}
+.cell {
+  display : table-cell;
 }
 
 .cellclear {
@@ -82,13 +69,22 @@ a.button {
   padding: 3px;
 }
 
-.xxsmall_font {
-  font-size: xx-small;
+#top_button {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
 }
 
-.logo {
-//  border: 1px solid red;
-  display: inline-block;
-  padding-left: 10px;
-  padding-right: 10px;
+#top_button:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
 }
