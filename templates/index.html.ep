@@ -7,7 +7,8 @@
 
 %= form_for login => (method => 'post') => begin
     %= include '_credentials'
-    %= submit_button 'Login'
+    %= tag 'br'
+    %= submit_button 'Login', style => "border: 1px solid #bbb;"
 %= end
 
 </div>
