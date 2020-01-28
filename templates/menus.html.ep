@@ -3,10 +3,9 @@
 %= include '_flash'
 %= link_to 'Go to My Meals' => '/auth', class => 'button', style => "border: 1px solid #bbb;"
 %= tag 'p'
-%= tag b => 'Menus:'
 <form action="/menus" method="post" style="display: inline-block;">
     <select name="meal_id" onchange="this.form.submit();">
-        <option value="">New...</option>
+        <option value="">New menu...</option>
 % while ( my $m = $meals->next ) {
         <option value="<%= $m->id %>"><%= $m->name %></option>
 % }
