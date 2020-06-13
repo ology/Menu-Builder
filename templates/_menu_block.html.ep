@@ -1,11 +1,10 @@
 <div class="cellblue" style="display: inline-block; vertical-align: top;">
     <button id="menu_<%= $m->id %>"><%= $m->name %></button>
+    <a href="http://dev.ology.net:8060/?title=<%= $m->name %>" class="button" target="_blank" style="border: 1px solid #bbb;">></a>
     <div id="menu_items_<%= $m->id %>" style="display: none">
-        %= tag 'p'
         <form action="/update_menu" method="post">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
             <input type="text" name="menu_name" size="30" placeholder="Menu name" value="<%= $m->name %>">
-            <a href="http://dev.ology.net:8060/?title=<%= $m->name %>" class="button" target="_blank" style="border: 1px solid #bbb;">></a>
             %= tag 'p'
         % for my $i ( @{ $menu_items->{ $m->id } } ) {
             <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
@@ -22,7 +21,7 @@
         </form>
         <form action="/delete_menu" method="post" title="Delete menu" onclick="return confirm('Delete this menu?')">
             <input type="hidden" name="menu_id" value="<%= $m->id %>">
-            <input type="submit" name="submit" value="Delete">
+            <input type="submit" name="submit" value="Delete" style="float: right;">
         </form>
     </div>
 </div>
