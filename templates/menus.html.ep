@@ -1,7 +1,7 @@
 % stash('template', __FILE__);
 % layout 'default';
 %= include '_flash'
-%= link_to 'Go to My Meals' => '/auth', class => 'button', style => "border: 1px solid #bbb;"
+%= link_to 'Go to My Meals' => '/auth', class => 'button'
 %= tag 'p'
 <form action="/menus" method="post" style="display: inline-block;">
     <select name="meal_id" onchange="this.form.submit();">
@@ -12,7 +12,7 @@
     </select>
 </form>
 &nbsp;
-<button id="toggle_menu_schedule" style="border: 1px solid #bbb;"">Toggle Schedule</button>
+<button id="toggle_menu_schedule">Toggle Schedule</button>
 
 % if ( $items->count ) {
 %= tag 'p'

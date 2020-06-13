@@ -1,7 +1,7 @@
 % stash('template', __FILE__);
 % layout 'default';
 %= include '_flash'
-%= link_to 'Go to My Menus' => '/menus', class => 'button', style => "border: 1px solid #bbb;"
+%= link_to 'Go to My Menus' => '/menus', class => 'button'
 %= tag 'p'
 %= tag b => 'Meal Type:'
 <div class="tablewrapper">
