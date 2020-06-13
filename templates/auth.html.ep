@@ -43,7 +43,7 @@
         </form>
         <form action="/delete_meal" method="post" title="Delete meal" onclick="return confirm('Delete this meal and all child menus?')">
             <input type="hidden" name="meal_id" value="<%= $m->id %>">
-            <input type="submit" name="submit" value="Delete">
+            <input type="submit" name="submit" value="Delete" style="float: right;">
         </form>
     </div>
 </div>
