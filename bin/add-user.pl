@@ -7,7 +7,7 @@ use Mojolicious::Lite;
 
 my ( $name, $pass ) = @ARGV;
 
-my $config = plugin 'Config'=> { file => 'menu-builder.conf' };
+my $config = plugin 'Config'=> { file => '../menu-builder.conf' };
 plugin 'bcrypt';
 
 my $password = app->bcrypt($pass);
