@@ -25,7 +25,7 @@
     %= tag 'p'
 % while ( my $i = $items->next ) {
         <input type="hidden" name="meal_item_id" value="<%= $i->id %>">
-        <input type="text" name="item_value" size="60" placeholder="<%= $i->name %>" list="menu_item_list">
+        <input type="text" name="item_value" size="30" placeholder="<%= $i->name %>" list="menu_item_list">
         <datalist id="menu_item_list">
     % for my $m_id ( keys %$menu_items ) {
         % for my $item ( @{ $menu_items->{$m_id} } ) {
@@ -37,7 +37,7 @@
 % }
     %= tag 'br'
     <input type="submit" name="submit" value="Add">
-    <a href="/menus" class="button">Cancel</a>
+    <a href="/menus" class="button" style="float: right;">Cancel</a>
 </form>
 </div>
 % }
