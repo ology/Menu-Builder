@@ -28,7 +28,6 @@
 <div class="cellblue" style="display: inline-block; vertical-align: top;">
     <button id="meal_<%= $m->id %>"><%= $m->name %></button>
     <div id="meal_items_<%= $m->id %>" style="display: none">
-        %= tag 'p'
         <form action="/update_meal" method="post" title="Update meal">
             <input type="hidden" name="meal_id" value="<%= $m->id %>">
             <input type="text" name="meal_name" size="20" placeholder="Meal name" value="<%= $m->name %>">
