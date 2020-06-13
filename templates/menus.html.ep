@@ -37,6 +37,7 @@
 % }
     %= tag 'br'
     <input type="submit" name="submit" value="Add">
+    <a href="/menus" class="button">Cancel</a>
 </form>
 </div>
 % }
