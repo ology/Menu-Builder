@@ -168,11 +168,11 @@ post '/update_meal' => sub {
     my $meal_item_ids = $self->every_param('meal_item_id');
     my $meal_items    = $self->every_param('meal_item');
 
-    my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
+    my $meal = $self->schema->resultset('Meal')->find($meal_id);
     $meal->update({ name => $meal_name });
 
     for my $n ( 0 .. @$meal_items - 1 ) {
-        my $item = $self->schema->resultset('MealItem')->find({ id => $meal_item_ids->[$n] });
+        my $item = $self->schema->resultset('MealItem')->find($meal_item_ids->[$n]);
         $item->update({ name => $meal_items->[$n] });
     }
 
@@ -191,7 +191,7 @@ post '/delete_meal' => sub {
     my $account_id = $self->session('auth');
     my $meal_id    = $self->param('meal_id');
 
-    my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
+    my $meal = $self->schema->resultset('Meal')->find($meal_id);
     $meal->delete;
 
     my $items = $self->schema->resultset('MealItem')->search(
@@ -255,7 +255,7 @@ any '/menus' => sub {
         },
     );
 
-    my $meal = $self->schema->resultset('Meal')->find({ id => $meal_id });
+    my $meal = $self->schema->resultset('Meal')->find($meal_id);
     my $name = $meal ? $meal->name : '';
     my $id   = $meal ? $meal->id : '';
 
@@ -357,11 +357,11 @@ post '/update_menu' => sub {
     my $menu_item_ids = $self->every_param('menu_item_id');
     my $menu_items    = $self->every_param('menu_item');
 
-    my $menu = $self->schema->resultset('Menu')->find({ id => $menu_id });
+    my $menu = $self->schema->resultset('Menu')->find($menu_id);
     $menu->update({ name => $menu_name });
 
     for my $n ( 0 .. @$menu_items - 1 ) {
-        my $item = $self->schema->resultset('MenuItem')->find({ id => $menu_item_ids->[$n] });
+        my $item = $self->schema->resultset('MenuItem')->find($menu_item_ids->[$n]);
         $item->update({ value => $menu_items->[$n] });
     }
 
@@ -380,7 +380,7 @@ post '/delete_menu' => sub {
     my $account_id = $self->session('auth');
     my $menu_id    = $self->param('menu_id');
 
-    my $menu = $self->schema->resultset('Menu')->find({ id => $menu_id });
+    my $menu = $self->schema->resultset('Menu')->find($menu_id);
     $menu->delete;
 
     my $items = $self->schema->resultset('MenuItem')->search(
