@@ -221,16 +221,6 @@ post '/delete_meal' => sub {
 
         while ( my $item = $items->next ) {
             $item->delete;
-
-            my $details = $self->schema->resultset('ItemDetail')->search(
-                {
-                    item_id => $item->id,
-                },
-            );
-
-            while ( my $detail = $details->next ) {
-                $detail->delete;
-            }
         }
     }
 
