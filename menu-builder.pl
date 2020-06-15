@@ -92,19 +92,11 @@ get '/auth' => sub {
 
     my $account_id = $self->session('auth');
 
-    my $meals = $self->schema->resultset('Meal')->search(
-        {
-            account_id => $account_id,
-        },
-    );
+    my $meals = $self->schema->resultset('Meal')->search({ account_id => $account_id });
 
     my $meal_items = {};
     for my $meal ( $meals->all ) {
-        my $items = $self->schema->resultset('MealItem')->search(
-            {
-                meal_id => $meal->id,
-            },
-        );
+        my $items = $self->schema->resultset('MealItem')->search({ meal_id => $meal->id });
 
         for my $item ( $items->all ) {
             push @{ $meal_items->{ $meal->id } }, {
@@ -194,30 +186,18 @@ post '/delete_meal' => sub {
     my $meal = $self->schema->resultset('Meal')->find($meal_id);
     $meal->delete;
 
-    my $items = $self->schema->resultset('MealItem')->search(
-        {
-            meal_id => $meal->id,
-        },
-    );
+    my $items = $self->schema->resultset('MealItem')->search({ meal_id => $meal->id });
 
     while ( my $item = $items->next ) {
         $item->delete;
     }
 
-    my $menus = $self->schema->resultset('Menu')->search(
-        {
-            meal_id => $meal->id,
-        },
-    );
+    my $menus = $self->schema->resultset('Menu')->search({ meal_id => $meal->id });
 
     while ( my $menu = $menus->next ) {
         $menu->delete;
 
-        $items = $self->schema->resultset('MenuItem')->search(
-            {
-                menu_id => $menu->id,
-            },
-        );
+        $items = $self->schema->resultset('MenuItem')->search({ menu_id => $menu->id });
 
         while ( my $item = $items->next ) {
             $item->delete;
@@ -239,21 +219,13 @@ any '/menus' => sub {
     my $account_id = $self->session('auth');
     my $meal_id    = $self->param('meal_id');
 
-    my $meals = $self->schema->resultset('Meal')->search(
-        {
-            account_id => $account_id,
-        },
-    );
+    my $meals = $self->schema->resultset('Meal')->search({ account_id => $account_id });
 
     my $meal = $self->schema->resultset('Meal')->find($meal_id);
     my $name = $meal ? $meal->name : '';
     my $id   = $meal ? $meal->id : '';
 
-    my $items = $self->schema->resultset('MealItem')->search(
-        {
-            meal_id => $meal_id,
-        },
-    );
+    my $items = $self->schema->resultset('MealItem')->search({ meal_id => $meal_id });
 
     my $menus = $self->schema->resultset('Menu')->search(
         {
@@ -394,7 +366,7 @@ Gene Boggs <gene.boggs@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2019 by Gene Boggs.
+This software is copyright (c) 2020 by Gene Boggs.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
