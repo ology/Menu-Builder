@@ -76,6 +76,12 @@ $t->post_ok('/add_menu' => form => { meal_id => 1, menu_name => 'Foo', meal_item
   ->content_like(qr/Test Meal!:/)
   ->content_like(qr/Foo/);
 
+$t->post_ok('/update_menu' => form => { menu_id => 1, menu_name => 'Foo?', menu_item_id => 1, menu_item => 'Bar...' })
+  ->status_is(200)
+  ->content_like(qr/Test Meal!:/)
+  ->content_like(qr/Foo\?/)
+  ->content_like(qr/Bar\.\.\./);
+
 $t->post_ok('/delete_meal' => form => { meal => 1 })
   ->status_is(200)
   ->content_isnt('Test Meal!');
