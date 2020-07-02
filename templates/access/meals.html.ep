@@ -42,6 +42,7 @@
             <input type="hidden" name="meal" value="<%= $m->id %>">
             <button type="submit" class="btn btn-secondary btn-sm" style="float: right; margin-right: 5px;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </form>
+        <br clear="all">
         <p></p>
     </div>
 % }
