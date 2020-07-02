@@ -1,33 +1,19 @@
 % while (my $sched = $schedules->next) {
   <button id="schedule_<%= $sched->id %>" class="btn btn-info btn-sm"><i class="fa fa-calendar-o" aria-hidden="true"></i> Week <%= $sched->name %></button>
   <div id="schedule_items_<%= $sched->id %>" style="display: none">
-  % my $day = $sched->monday ? rs('Menu')->find($sched->monday) : undef;
-  % my $name = $day ? $day->name : '';
-  Monday: <%= $name %>
+  Monday: <%= day_name($sched->monday) %>
   <br>
-  % $day = $sched->tuesday ? rs('Menu')->find($sched->tuesday) : undef;
-  % $name = $day ? $day->name : '';
-  Tuesday: <%= $name %>
+  Tuesday: <%= day_name($sched->tuesday) %>
   <br>
-  % $day = $sched->wednesday ? rs('Menu')->find($sched->wednesday) : undef;
-  % $name = $day ? $day->name : '';
-  Wednesday: <%= $name %>
+  Wednesday: <%= day_name($sched->wednesday) %>
   <br>
-  % $day = $sched->thursday ? rs('Menu')->find($sched->thursday) : undef;
-  % $name = $day ? $day->name : '';
-  Thursday: <%= $name %>
+  Thursday: <%= day_name($sched->thursday) %>
   <br>
-  % $day = $sched->friday ? rs('Menu')->find($sched->friday) : undef;
-  % $name = $day ? $day->name : '';
-  Friday: <%= $name %>
+  Friday: <%= day_name($sched->friday) %>
   <br>
-  % $day = $sched->saturday ? rs('Menu')->find($sched->saturday) : undef;
-  % $name = $day ? $day->name : '';
-  Saturday: <%= $name %>
+  Saturday: <%= day_name($sched->saturday) %>
   <br>
-  % $day = $sched->sunday ? rs('Menu')->find($sched->sunday) : undef;
-  % $name = $day ? $day->name : '';
-  Sunday: <%= $name %>
+  Sunday: <%= day_name($sched->sunday) %>
   </div>
   %= tag 'p'
 % }

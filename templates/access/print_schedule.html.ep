@@ -11,27 +11,13 @@
         <h5 class="card-title">Week <%= $sched->name %></h5>
         <p class="card-text">
 
-  % my $day = $sched->monday ? rs('Menu')->find($sched->monday) : undef;
-  % my $name = $day ? $day->name : '';
-  <p><i>Mon:</i> <%= $name %></p>
-  % $day = $sched->tuesday ? rs('Menu')->find($sched->tuesday) : undef;
-  % $name = $day ? $day->name : '';
-  <p><i>Tue:</i> <%= $name %></p>
-  % $day = $sched->wednesday ? rs('Menu')->find($sched->wednesday) : undef;
-  % $name = $day ? $day->name : '';
-  <p><i>Wed:</i> <%= $name %></p>
-  % $day = $sched->thursday ? rs('Menu')->find($sched->thursday) : undef;
-  % $name = $day ? $day->name : '';
-  <p><i>Thu:</i> <%= $name %></p>
-  % $day = $sched->friday ? rs('Menu')->find($sched->friday) : undef;
-  % $name = $day ? $day->name : '';
-  <p><i>Fri:</i> <%= $name %></p>
-  % $day = $sched->saturday ? rs('Menu')->find($sched->saturday) : undef;
-  % $name = $day ? $day->name : '';
-  <p><i>Sat:</i> <%= $name %></p>
-  % $day = $sched->sunday ? rs('Menu')->find($sched->sunday) : undef;
-  % $name = $day ? $day->name : '';
-  <p><i>Sun:</i> <%= $name %></p>
+  <p><i>Mon:</i> <%= day_name($sched->monday) %></p>
+  <p><i>Tue:</i> <%= day_name($sched->tuesday) %></p>
+  <p><i>Wed:</i> <%= day_name($sched->wednesday) %></p>
+  <p><i>Thu:</i> <%= day_name($sched->thursday) %></p>
+  <p><i>Fri:</i> <%= day_name($sched->friday) %></p>
+  <p><i>Sat:</i> <%= day_name($sched->saturday) %></p>
+  <p><i>Sun:</i> <%= day_name($sched->sunday) %></p>
 
       </div>
     </div>

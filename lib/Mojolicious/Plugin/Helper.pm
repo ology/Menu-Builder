@@ -24,6 +24,12 @@ sub register {
             if $result && $result->check_password($pass);
     });
 
+    $app->helper(day_name => sub {
+        my ($c, $day) = @_;
+        my $result = $day ? $c->schema->resultset('Menu')->find($day) : undef;
+        return $result ? $result->name : '';
+    });
+
 }
 
 1;
