@@ -48,6 +48,9 @@
 </div>
 </div>
 
+<p></p>
+<a href="/logout">Logout</a>
+
 <script>
 $(document).ready(
     function() {
