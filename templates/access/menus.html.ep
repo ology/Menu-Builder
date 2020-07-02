@@ -1,0 +1,113 @@
+% layout 'default';
+% title 'Menus';
+<div class="container">
+%= include 'access/_flash'
+
+<a href="/meals" class="btn btn-success btn-sm"><i class="fa fa-cogs" aria-hidden="true"></i> Setup</a>
+<form method="post" style="display: inline-block;">
+    <select name="meal_id" onchange="this.form.submit();" class="form-control">
+        <option value="">New menu...</option>
+% while ( my $m = $meals->next ) {
+        <option value="<%= $m->id %>"><%= $m->name %></option>
+% }
+    </select>
+</form>
+<button id="toggle_menu_schedule" class="btn btn-secondary btn-sm"><i class="fa fa-calendar-o" aria-hidden="true"></i> Weeks</button>
+
+% if ( $items && $items->count ) {
+%= tag 'p'
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">New <%= $meal_name %> menu:</h5>
+    <form action="/add_menu" method="post">
+        <input type="hidden" name="meal_id" value="<%= $meal_id %>">
+        <input type="text" name="menu_name" placeholder="Menu name" class="form-control">
+    %= tag 'p'
+% while ( my $i = $items->next ) {
+        <input type="hidden" name="meal_item_id" value="<%= $i->id %>">
+        <input type="text" name="item_value" placeholder="<%= $i->name %>" list="menu_item_list" class="form-control">
+        <datalist id="menu_item_list">
+    % for my $m_id ( keys %$menu_items ) {
+        % for my $item ( @{ $menu_items->{$m_id} } ) {
+            <option><%= $item->value %></option>
+        % }
+    % }
+        </datalist>
+% }
+    %= tag 'br'
+        <button type="submit" class="btn btn-primary btn-sm" style="float: right;"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+        <a href="/menus" class="btn btn-secondary btn-sm" style="float: right; margin-right: 5px;"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+    </form>
+  </div>
+</div>
+% }
+
+%= tag 'p'
+
+<div id="menu_schedule" style="display: none;">
+<a href="/print_schedule" class="btn btn-secondary btn-sm"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+%= tag 'p'
+%= include 'access/_schedule_block'
+</div>
+
+% if ( $menus && $menus->count ) {
+
+%= tag 'p'
+
+<div class="tablewrapper">
+    <div class="table">
+
+    % my %seen = ();
+    % my $counter = 0;
+    % while (my $m = $menus->next) {
+        % $counter++;
+        % unless ($seen{ $m->meal->name }++) {
+            % if ($counter > 1) {
+        </div>
+            % }
+        <div class="tablerow">
+            <b><%= $m->meal->name %>:</b>
+        </div>
+        <div class="tablerow" style="width: 100%; height: 100%; overflow: auto;">
+        % }
+%= include 'access/_menu_block', m => $m, menu_items => $menu_items
+
+        %= tag 'p'
+    % }
+
+    </div>
+</div>
+
+% }
+
+</div>
+
+<script>
+$(document).ready(
+    function() {
+        toggle_schedules();
+        schedule_click();
+        menu_click();
+    }
+);
+
+function toggle_schedules() {
+    $('#toggle_menu_schedule').click(function () {
+        $('#menu_schedule').toggle();
+    });
+}
+
+function schedule_click() {
+    $('[id^=schedule_]').click(function () {
+        var num = this.id.slice(9);
+        $('#schedule_items_' + num).toggle();
+    });
+}
+
+function menu_click() {
+    $('[id^=menu_]').click(function () {
+        var num = this.id.slice(5);
+        $('#menu_items_' + num).toggle();
+    });
+}
+</script>

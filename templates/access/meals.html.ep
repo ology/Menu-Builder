@@ -1,0 +1,73 @@
+% layout 'default';
+% title 'Meals';
+<div class="container">
+%= include 'access/_flash'
+<a href="/menus" class="btn btn-success btn-sm"><i class="fa fa-cutlery" aria-hidden="true"></i> My Menus</a>
+%= tag 'p'
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Create a new meal type</h5>
+    <form method="post" title="Create a new meal">
+        <input type="text" name="name" id="name" class="form-control" placeholder="New meal type name" required>
+        <div id="meal_item"></div>
+        <br>
+        <button type="submit" name="submit" class="btn btn-primary btn-sm" style="float: right;"><i class="fa fa-check" aria-hidden="true"></i> Submit</button>
+    </form>
+    <a href="/meals" class="btn btn-secondary btn-sm" style="float: right; margin-right: 5px;"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+    <button id="add" class="btn btn-warning btn-sm" style="float: left;"><i class="fa fa-plus" aria-hidden="true"></i> Category</button>
+  </div>
+</div>
+
+% if ( $meals->count ) {
+%= tag 'p'
+% }
+<div id="meals" style="width: 100%; height: 100%; overflow: auto;">
+% while ( my $m = $meals->next ) {
+    <button id="meal_<%= $m->id %>" class="btn btn-info btn-sm"><i class="fa fa-cogs" aria-hidden="true"></i> <%= $m->name %></button>
+    <p></p>
+    <div id="meal_items_<%= $m->id %>" style="display: none">
+        <form action="/update_meal" method="post" title="Update meal">
+            <input type="hidden" name="meal" value="<%= $m->id %>">
+            <input type="text" name="name" size="20" placeholder="Meal type name" value="<%= $m->name %>" class="form-control" required>
+            %= tag 'p'
+    % while (my $i = $meal_items->{ $m->id }->next) {
+            <input type="hidden" name="meal_item_id" value="<%= $i->id %>">
+            <input type="text" name="meal_item" size="20" placeholder="Category" value="<%= $i->name %>" class="form-control" required>
+    % }
+            %= tag 'p'
+            <button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Update</button>
+        </form>
+        <form action="/delete_meal" method="post" title="Delete meal" onclick="return confirm('Delete this meal and all child menus?')">
+            <input type="hidden" name="meal" value="<%= $m->id %>">
+            <button type="submit" name="submit" class="btn btn-secondary btn-sm" style="float: right;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+        </form>
+        <p></p>
+    </div>
+% }
+</div>
+</div>
+
+<script>
+$(document).ready(
+    function() {
+        add_click();
+        meal_click();
+    }
+);
+
+function add_click() {
+    $('#add').click(
+        function() {
+            $('#meal_item').append('<input type="text" name="item" class="form-control" placeholder="Category">');
+        }
+    );
+}
+
+function meal_click() {
+    $('[id^=meal_]').click(function () {
+        var num = this.id.slice(5);
+        $('#meal_items_' + num).toggle();
+    });
+}
+</script>

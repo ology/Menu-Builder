@@ -1,0 +1,32 @@
+    <button id="menu_<%= $m->id %>" class="btn btn-info btn-sm"><i class="fa fa-cutlery" aria-hidden="true"></i> <%= $m->name %></button>
+    <div id="menu_items_<%= $m->id %>" style="display: none">
+        <p></p>
+        <form action="/update_menu" method="post">
+            <input type="hidden" name="menu_id" value="<%= $m->id %>">
+            <input type="text" name="menu_name" placeholder="Menu name" value="<%= $m->name %>" class="form-control">
+        % for my $i ( @{ $menu_items->{ $m->id } } ) {
+            <input type="hidden" name="menu_item_id" value="<%= $i->id %>">
+            <%= $i->meal_item->name %>:
+            %= tag 'br'
+            <input type="text" name="menu_item" placeholder="Item value" value="<%= $i->value %>" class="form-control">
+        % }
+            %= tag 'br'
+            <select name="schedule" onchange="this.form.submit();" class="form-control">
+                <option value="">Schedule...</option>
+        % for my $week (1 .. 4) {
+            % for my $day (qw(monday tuesday wednesday thursday friday saturday sunday)) {
+                <option value="<%= "$week $day" %>"><%= "Week $week " . ucfirst($day) %></option>
+            % }
+            % if ($week < 4) {
+                <option value="">-</option>
+            % }
+        % }
+            </select>
+            %= tag 'p'
+            <button type="submit" class="btn btn-primary btn-sm" title="Update menu" style="float: right;"><i class="fa fa-repeat" aria-hidden="true"></i> Update</button>
+        </form>
+        <form action="/delete_menu" method="post" title="Delete menu" onclick="return confirm('Delete this menu?')">
+            <input type="hidden" name="menu_id" value="<%= $m->id %>">
+            <button type="submit" class="btn btn-secondary btn-sm" style="float: right; margin-right: 5px;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+        </form>
+    </div>

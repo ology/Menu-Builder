@@ -1,0 +1,50 @@
+% layout 'default';
+% title 'Print Schedule';
+<div class="container">
+
+<div class="row">
+
+% while (my $sched = $schedules->next) {
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Week <%= $sched->name %></h5>
+        <p class="card-text">
+
+  % my $day = rs('Menu')->find($sched->monday);
+  % my $name = $day ? $day->name : '';
+  Mon: <%= $name %>
+  <br>
+  % $day = rs('Menu')->find($sched->tuesday);
+  % $name = $day ? $day->name : '';
+  Tue: <%= $name %>
+  <br>
+  % $day = rs('Menu')->find($sched->wednesday);
+  % $name = $day ? $day->name : '';
+  Wed: <%= $name %>
+  <br>
+  % $day = rs('Menu')->find($sched->thursday);
+  % $name = $day ? $day->name : '';
+  Thu: <%= $name %>
+  <br>
+  % $day = rs('Menu')->find($sched->friday);
+  % $name = $day ? $day->name : '';
+  Fri: <%= $name %>
+  <br>
+  % $day = rs('Menu')->find($sched->saturday);
+  % $name = $day ? $day->name : '';
+  Sat: <%= $name %>
+  <br>
+  % $day = rs('Menu')->find($sched->sunday);
+  % $name = $day ? $day->name : '';
+  Sun: <%= $name %>
+
+        </p>
+      </div>
+    </div>
+  </div>
+% }
+
+</div>
+
+</div>
