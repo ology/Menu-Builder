@@ -13,33 +13,26 @@
 
   % my $day = $sched->monday ? rs('Menu')->find($sched->monday) : undef;
   % my $name = $day ? $day->name : '';
-  Mon: <%= $name %>
-  <br>
+  <p>Mon: <%= $name %></p>
   % $day = $sched->tuesday ? rs('Menu')->find($sched->tuesday) : undef;
   % $name = $day ? $day->name : '';
-  Tue: <%= $name %>
-  <br>
+  <p>Tue: <%= $name %></p>
   % $day = $sched->wednesday ? rs('Menu')->find($sched->wednesday) : undef;
   % $name = $day ? $day->name : '';
-  Wed: <%= $name %>
-  <br>
+  <p>Wed: <%= $name %></p>
   % $day = $sched->thursday ? rs('Menu')->find($sched->thursday) : undef;
   % $name = $day ? $day->name : '';
-  Thu: <%= $name %>
-  <br>
+  <p>Thu: <%= $name %></p>
   % $day = $sched->friday ? rs('Menu')->find($sched->friday) : undef;
   % $name = $day ? $day->name : '';
-  Fri: <%= $name %>
-  <br>
+  <p>Fri: <%= $name %></p>
   % $day = $sched->saturday ? rs('Menu')->find($sched->saturday) : undef;
   % $name = $day ? $day->name : '';
-  Sat: <%= $name %>
-  <br>
+  <p>Sat: <%= $name %></p>
   % $day = $sched->sunday ? rs('Menu')->find($sched->sunday) : undef;
   % $name = $day ? $day->name : '';
-  Sun: <%= $name %>
+  <p>Sun: <%= $name %></p>
 
-        </p>
       </div>
     </div>
   </div>
