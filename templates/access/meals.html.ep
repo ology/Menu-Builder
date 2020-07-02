@@ -36,11 +36,11 @@
             <input type="text" name="meal_item" size="20" placeholder="Category" value="<%= $i->name %>" class="form-control" required>
     % }
             %= tag 'p'
-            <button type="submit" name="submit" class="btn btn-primary btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Update</button>
+            <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-repeat" aria-hidden="true"></i> Update</button>
         </form>
         <form action="/delete_meal" method="post" title="Delete meal" onclick="return confirm('Delete this meal and all child menus?')">
             <input type="hidden" name="meal" value="<%= $m->id %>">
-            <button type="submit" name="submit" class="btn btn-secondary btn-sm" style="float: right;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+            <button type="submit" class="btn btn-secondary btn-sm" style="float: right;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </form>
         <p></p>
     </div>
