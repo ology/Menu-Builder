@@ -122,7 +122,6 @@ sub menus {
         {
             join     => 'meal',
             prefetch => 'meal',
-            order_by => { -asc => \'LOWER(me.name)' },
         }
     );
     my $menu_items = {};
