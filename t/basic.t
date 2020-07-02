@@ -59,26 +59,30 @@ $t->post_ok('/meals' => form => { name => 'Test Meal', item => 'Test Item' })
   ->status_is(200)
   ->content_like(qr/Test Meal/);
 
+$t->post_ok('/update_meal' => form => { meal => 1, name => 'Test Meal!', meal_item_id => 1, meal_item => 'Test Item' })
+  ->status_is(200)
+  ->content_like(qr/Test Meal!/);
+
 $t->get_ok('/menus')
   ->status_is(200)
   ->content_like(qr/Setup/);
 
 $t->post_ok('/menus' => form => { meal_id => 1 })
   ->status_is(200)
-  ->content_like(qr/New Test Meal menu/);
+  ->content_like(qr/New Test Meal! menu/);
 
 $t->post_ok('/add_menu' => form => { meal_id => 1, menu_name => 'Foo', meal_item_id => 1, item_value => 'Bar' })
   ->status_is(200)
-  ->content_like(qr/Test Meal:/)
+  ->content_like(qr/Test Meal!:/)
   ->content_like(qr/Foo/);
 
 $t->post_ok('/delete_meal' => form => { meal => 1 })
   ->status_is(200)
-  ->content_isnt('Test Meal');
+  ->content_isnt('Test Meal!');
 
 $t->get_ok('/menus')
   ->status_is(200)
-  ->content_isnt('Test Meal:')
+  ->content_isnt('Test Meal!:')
   ->content_isnt('Foo');
 
 done_testing();
