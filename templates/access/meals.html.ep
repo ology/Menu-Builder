@@ -29,11 +29,11 @@
     <div id="meal_items_<%= $m->id %>" style="display: none">
         <form action="/update_meal" method="post" title="Update meal">
             <input type="hidden" name="meal" value="<%= $m->id %>">
-            <input type="text" name="name" size="20" placeholder="Meal type name" value="<%= $m->name %>" class="form-control" required>
+            <input type="text" name="name" placeholder="Meal type name" value="<%= $m->name %>" class="form-control" required>
             %= tag 'p'
     % while (my $i = $meal_items->{ $m->id }->next) {
             <input type="hidden" name="meal_item_id" value="<%= $i->id %>">
-            <input type="text" name="meal_item" size="20" placeholder="Category" value="<%= $i->name %>" class="form-control" required>
+            <input type="text" name="meal_item" placeholder="Category" value="<%= $i->name %>" class="form-control" required>
     % }
             %= tag 'p'
             <button type="submit" class="btn btn-primary btn-sm" style="float: right;"><i class="fa fa-repeat" aria-hidden="true"></i> Update</button>
