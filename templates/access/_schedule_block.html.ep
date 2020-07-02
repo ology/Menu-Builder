@@ -1,19 +1,19 @@
 % while (my $sched = $schedules->next) {
   <button id="schedule_<%= $sched->id %>" class="btn btn-info btn-sm"><i class="fa fa-calendar-o" aria-hidden="true"></i> Week <%= $sched->name %></button>
   <div id="schedule_items_<%= $sched->id %>" style="display: none">
-  Monday: <%= day_name($sched->monday) %>
+  <i>Monday:</i> <%= day_name($sched->monday) %>
   <br>
-  Tuesday: <%= day_name($sched->tuesday) %>
+  <i>Tuesday:</i> <%= day_name($sched->tuesday) %>
   <br>
-  Wednesday: <%= day_name($sched->wednesday) %>
+  <i>Wednesday:</i> <%= day_name($sched->wednesday) %>
   <br>
-  Thursday: <%= day_name($sched->thursday) %>
+  <i>Thursday:</i> <%= day_name($sched->thursday) %>
   <br>
-  Friday: <%= day_name($sched->friday) %>
+  <i>Friday:</i> <%= day_name($sched->friday) %>
   <br>
-  Saturday: <%= day_name($sched->saturday) %>
+  <i>Saturday:</i> <%= day_name($sched->saturday) %>
   <br>
-  Sunday: <%= day_name($sched->sunday) %>
+  <i>Sunday:</i> <%= day_name($sched->sunday) %>
   </div>
   %= tag 'p'
 % }
