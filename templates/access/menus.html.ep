@@ -3,7 +3,6 @@
 <div class="container">
 %= include 'access/_flash'
 
-<div class="row align-items-center">
 <a href="/meals" class="btn btn-success btn-sm"><i class="fa fa-cogs" aria-hidden="true"></i> Setup</a>
 <form method="post" style="display: inline-block;">
     <select name="meal_id" onchange="this.form.submit();" class="form-control">
@@ -14,7 +13,6 @@
     </select>
 </form>
 <button id="toggle_menu_schedule" class="btn btn-secondary btn-sm"><i class="fa fa-calendar-o" aria-hidden="true"></i> Weeks</button>
-</div>
 
 % if ( $items && $items->count ) {
 %= tag 'p'
