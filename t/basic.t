@@ -19,7 +19,9 @@ $t->ua->max_redirects(1);
 
 $t->get_ok('/')
   ->status_is(200)
-  ->content_like(qr/Login/);
+  ->content_like(qr/Login/)
+  ->element_exists('form input[name="username"]')
+  ->element_exists('form input[name="password"]');
 
 $t->get_ok('/signup')
   ->status_is(200)
