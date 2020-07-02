@@ -46,10 +46,11 @@
     </div>
 % }
 </div>
-</div>
 
 <p></p>
 <a href="/logout">Logout</a>
+
+</div>
 
 <script>
 $(document).ready(
