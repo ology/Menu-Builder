@@ -22,7 +22,7 @@
 % if ( $meals->count ) {
 %= tag 'p'
 % }
-<div id="meals" style="width: 100%; height: 100%; overflow: auto;">
+<div id="meals">
 % while ( my $m = $meals->next ) {
     <button id="meal_<%= $m->id %>" class="btn btn-info btn-sm"><i class="fa fa-cogs" aria-hidden="true"></i> <%= $m->name %></button>
     <p></p>
@@ -42,7 +42,6 @@
             <input type="hidden" name="meal" value="<%= $m->id %>">
             <button type="submit" class="btn btn-secondary btn-sm" style="float: right; margin-right: 5px;"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </form>
-        <br clear="all">
         <p></p>
     </div>
 % }
