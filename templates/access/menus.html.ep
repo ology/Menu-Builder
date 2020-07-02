@@ -81,7 +81,7 @@
 % }
 
 <p></p>
-<a href="/logout">Logout</a>
+<a href="/logout" class="btn btn-secondary btn-sm"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
 
 </div>
 
