@@ -88,8 +88,7 @@ $t->post_ok('/update_menu' => form => { menu_id => 1, menu_name => 'Foo?', sched
   ->content_like(qr/Test Meal!:/)
   ->content_like(qr/Foo\?/)
   ->content_like(qr/Bar\.\.\./)
-  ->content_like(qr/Monday:<\/i> Foo\?/)
-;
+  ->content_like(qr/Monday:<\/i> Foo\?/);
 
 $t->post_ok('/delete_meal' => form => { meal => 1 })
   ->status_is(200)
