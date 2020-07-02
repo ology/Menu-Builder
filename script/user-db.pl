@@ -5,9 +5,9 @@ use warnings;
 use lib 'lib';
 use Schema;
 
-my ($name, $pass) = @ARGV;
+my ($email, $name, $pass) = @ARGV;
 
-my $config = do './shopping_list.conf';
+my $config = do './menu_builder.conf';
 
 my $schema = Schema->connect($config->{database}, '', '');
 
@@ -17,5 +17,5 @@ if ($account) {
     $account->update({ password => $pass });
 }
 else {
-    $schema->resultset('Account')->create({ username => $name, password => $pass });
+    $schema->resultset('Account')->create({ email => $email, username => $name, password => $pass });
 }
