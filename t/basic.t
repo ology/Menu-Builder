@@ -9,13 +9,13 @@ use Schema;
 
 my $t = Test::Mojo->new('MenuBuilder');
 
-$t->ua->max_redirects(1);
-
 my $sqlite = Test::SQLite->new;
 $t->app->config->{database} = $sqlite->dsn;
 my $schema = Schema->connect($sqlite->dsn);
 isa_ok $schema, 'Schema';
 $schema->deploy;
+
+$t->ua->max_redirects(1);
 
 $t->get_ok('/')
   ->status_is(200)
