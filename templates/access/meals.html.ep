@@ -2,7 +2,7 @@
 % title 'Meals';
 <div class="container">
 %= include 'access/_flash'
-<a href="/menus" class="btn btn-success btn-sm"><i class="fa fa-cutlery" aria-hidden="true"></i> My Menus</a>
+<a href="/menus" class="btn btn-success btn-sm"><i class="fa fa-cutlery" aria-hidden="true"></i> Menus</a>
 %= tag 'p'
 
 <div class="card">
