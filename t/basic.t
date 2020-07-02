@@ -97,6 +97,7 @@ $t->post_ok('/delete_meal' => form => { meal => 1 })
 $t->get_ok('/menus')
   ->status_is(200)
   ->content_isnt('Test Meal!:')
-  ->content_isnt('Foo?');
+  ->content_isnt('Foo?')
+  ->content_isnt('Monday:</i> Foo?');
 
 done_testing();
